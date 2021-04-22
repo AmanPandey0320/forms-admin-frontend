@@ -19,6 +19,8 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import Logs from './section/logs';
 import NewTemplate from './section/newTemplate';
 import Template from './section/template';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,10 +39,11 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
       },
 }));
-const Home = () => {
+
+const Home = (props) => {
     const classes = useStyles();
     const [drawer,setDrawer] = React.useState(false);
-    const [component,setComponent] = React.useState('tempalte')
+    const [component,setComponent] = React.useState('tempalte');
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -48,6 +51,7 @@ const Home = () => {
     
         setDrawer(open)
     };
+    
     return ( 
         <div>
             <AppBar color="primary" position="static">
@@ -93,6 +97,29 @@ const Home = () => {
         </div>
      );
 }
+
+const HomeWrapper = (props) => {
+    console.log(props);
+    const history = useHistory();
+    if(props.token){
+        return(
+            <Home history={history} {...props}/>
+        )
+    }else{
+        history.push('/');
+        return(
+            <>
+            </>
+        );
+    }
+}
  
-export default Home;
+
+const mapStatetoProps = (state) => {
+    return{
+        token:state.user.token
+    }
+}
+ 
+export default connect(mapStatetoProps)(HomeWrapper);
 
