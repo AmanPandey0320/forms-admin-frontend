@@ -7,6 +7,7 @@ const baseUrl = process.env.REACT_APP_backend_api_url;
 // console.log(baseUrl);
 
 export const postToBackend = ({endpoint,data,config},callback) => {
+    console.log(data);
     axios.post(baseUrl + endpoint,JSON.stringify(data),config).then(response=>{
         
         response.data.status = 200;

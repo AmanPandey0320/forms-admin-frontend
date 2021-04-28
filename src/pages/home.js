@@ -44,6 +44,7 @@ const Home = (props) => {
     const classes = useStyles();
     const [drawer,setDrawer] = React.useState(false);
     const [component,setComponent] = React.useState('tempalte');
+    // console.log(props.token);
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -92,14 +93,14 @@ const Home = (props) => {
             
             { component === 'tempalte' && <Template/>}
             { component === 'new' && <NewTemplate/>}
-            { component === 'log' && <Logs/>}
+            { component === 'log' && <Logs token = {props.token}/>}
 
         </div>
      );
 }
 
 const HomeWrapper = (props) => {
-    console.log(props);
+    // console.log(props);
     const history = useHistory();
     if(props.token){
         return(
