@@ -55,7 +55,7 @@ const Login = () => {
                             }}
                         />
                         <br/><br/>
-                        <TextField id="username" label="Password" type={passee?'text':'password'} onChange={(event)=>{setPassword(event.target.value)}}
+                        <TextField id="password" label="Password" type={passee?'text':'password'} onChange={(event)=>{setPassword(event.target.value)}}
                             InputProps={{
                                 endAdornment:<InputAdornment><IconButton onClick={()=>{setPassee(!passee)}}>{passee?<AiFillEyeInvisible size='0.75em'/>:<AiFillEye size='0.75em'/>}</IconButton></InputAdornment>
                             }}

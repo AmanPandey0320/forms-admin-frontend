@@ -11,10 +11,17 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { ImCross } from 'react-icons/im'
-import { themes } from '../../assets/data/theme'
-
+import { themes } from '../../assets/data/theme';
+import { SwatchesPicker } from 'react-color';
+import { swatchHandler } from '../../logic/home';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 const SettingDrawer = (props) => {
-    const { settingDrawer,toggleSettingDrawer,classes,setHeader } = props
+    const { settingDrawer,toggleSettingDrawer,classes,setHeader,setBgcolor,setColor } = props;
+    const [color_for,setColor_for] = React.useState('bg');
     return ( 
         <>
             <React.Fragment>
@@ -39,13 +46,44 @@ const SettingDrawer = (props) => {
                                             return(
                                                 <ListItem key={theme.id} onClick={()=>{setHeader(theme.id-1)}} button>
                                                     <div>
-                                                        <img src={theme.img} width="100%"/>
+                                                        <img src={theme.img} alt={`header img ${theme.id}`} width="100%"/>
                                                     </div>
                                                 </ListItem>
                                             );
                                         })
                                     }
                                 </List>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+                                <Typography>Colors</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <div style={{display:'flex',flexDirection:'column'}}>
+                                    <Typography>Select color</Typography>
+                                    <br/>
+                                    <SwatchesPicker width='200px' onChange={swatchHandler((color_for === 'bg' ? setBgcolor:setColor))}/>
+                                    <br/>
+                                    <FormControl component="fieldset">
+                                    <FormLabel component="legend">Color for:</FormLabel>
+                                    <RadioGroup name="color_for" value={color_for} onChange={(event)=>setColor_for(event.target.value)}>
+                                        <FormControlLabel
+                                            value="bg"
+                                            control={<Radio color='primary'/>}
+                                            label="Background"
+                                            labelPlacement="end"
+                                        />
+                                        <FormControlLabel
+                                            value="bd"
+                                            control={<Radio color='primary'/>}
+                                            label="Body"
+                                            labelPlacement="end"
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
+                                </div>
+                                
                             </AccordionDetails>
                         </Accordion>
                     </div>

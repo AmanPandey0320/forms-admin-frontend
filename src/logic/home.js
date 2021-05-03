@@ -22,3 +22,10 @@ export const getLog = (token,{setLogs}) => {
         }
     });
 }
+
+export const swatchHandler = (setColor) => (color,event) => {
+
+    console.log(color);
+    setColor(color.hex);
+
+}

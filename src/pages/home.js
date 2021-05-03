@@ -18,6 +18,8 @@ const Home = (props) => {
     const [settingDrawer,setSettingDrawer] = React.useState(false);
     const [component,setComponent] = React.useState('tempalte');
     const [header , setHeader] = React.useState(null);
+    const [bgcolor,setBgcolor] = React.useState('#e6f7ff');
+    const [color,setColor] = React.useState('#0099e6')
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -38,10 +40,10 @@ const Home = (props) => {
             <MainAppbar classes={classes} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={component}/>
             <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer}setComponent={setComponent} component={component}/>
 
-            <SettingDrawer settingDrawer={settingDrawer} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
+            <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             
             { component === 'tempalte' && <Template/>}
-            { component === 'new' && <NewTemplate header={header}/>}
+            { component === 'new' && <NewTemplate color={color} bgcolor = {bgcolor} header={header}/>}
             { component === 'log' && <Logs token = {props.token}/>}
 
         </div>
