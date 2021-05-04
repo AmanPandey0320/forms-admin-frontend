@@ -19,6 +19,23 @@ export const HeadingWrapper = styled.div`
     ${borderColor};
 `;
 
+export const BodyElement = styled.div`
+    margin-top: 2px;
+    border-width: 0px;
+    border-style: solid;
+    padding: 16px 16px;
+    border-radius: 4px;
+    background-color:#ffffff;
+    display:flex;
+    flex-direction:column;
+    border-color:#ffffff;
+`;
+export const BodyWrapper = styled.div`
+    margin-top:2px;
+    display:flex;
+    flex-direction:column;
+`;
+
 export const HeadingElement = styled.div`
     margin-top:16px;
 `;
