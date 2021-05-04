@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { borderColor } from 'styled-system'
 
-export const Div = styled.div`
+export const HeadingWrapper = styled.div`
     margin-top: 0.75%;
     border-top-width: 8px;
     border-bottom-width: 1px;
@@ -13,7 +13,14 @@ export const Div = styled.div`
     border-top-right-radius: 8px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    background-color:#ffffff;
+    display:flex;
+    flex-direction:column;
     ${borderColor};
+`;
+
+export const HeadingElement = styled.div`
+    margin-top:16px;
 `;
 
 export const FormWrapper = styled.div`
