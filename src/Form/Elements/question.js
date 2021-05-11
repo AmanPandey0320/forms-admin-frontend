@@ -33,7 +33,6 @@ const Question = (props) => {
     // console.log(props);
     return ( 
         <div>
-           <span>{key}.&nbsp;</span>
             <FormControl className={classes.textfield}>
                 <TextField
                     id={key}
@@ -43,7 +42,7 @@ const Question = (props) => {
                 />
             </FormControl>
             <FormControl className={classes.formControl}>
-                <InputLabel id={`select_for_question_${key}`}>Input Type</InputLabel>
+                <InputLabel id={`select_for_question_${key}`}>Question Type</InputLabel>
                 <Select
                     id={`select${key}`}
                     onChange={e => uiHandler({data:e.target.value,type:'IN'})}
