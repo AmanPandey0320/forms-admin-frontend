@@ -13,13 +13,11 @@ const removeOption = (index,state,uiHandler) => (event) => {
         data.push({id:id,text:element.text});
         id++;
     });
-    console.log(data);
     uiHandler({type:'REMV_OPTION',data:data});
 }
 
 const appendOption = (state,uiHandler,option) => (event) => {
     const index = state.length-1;
-    console.log(option);
     let data = [...state.slice(0,index),{id:index+1,text:option},{id:index+2,text:'New option'}];
     if(index < 0){
         data = [...state.slice(0,index),{id:index+1,text:'New option'}];

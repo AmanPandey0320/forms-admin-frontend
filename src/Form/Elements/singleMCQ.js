@@ -30,11 +30,9 @@ const SingleMCQ = (props) => {
             }
         }
     }
-    console.log(key);
     return ( 
         <FormControl component="fieldset" className={classes.formControl} >
             <FormLabel component="legend" >Options</FormLabel>
-            {console.log(options)}
             <RadioGroup color="primary" value={`op_no_1_for_${key}`} aria-label="options" name={`op_for_${key}`} >
                 {
                     options.map( (option,index) => <FormControlLabel key={`op_no_${index+1}${option.id}_for_${key}`} control={<Radio value={`op_no_${index+1}_for_${key}`} color="primary"/>} label={<span><TextField helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>} onChange={e => setCurr_op(e.target.value)} defaultValue={option.text} onKeyDown={editOption(index,options,this_uiHandler,curr_op)} placeholder="New option" color="primary"/><IconButton onClick={removeOption(index,options,this_uiHandler)} color="primary"><MdCancel/></IconButton></span>}/>)
