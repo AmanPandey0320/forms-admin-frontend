@@ -9,7 +9,7 @@ import ListDD from './Elements/list';
 import FileUpload from './Elements/fileUpload';
 
 const Element = (props) => {
-    const [type,setType] = React.useState('SO');
+    const [type,setType] = React.useState('MO');
     const [question,setQuestion] = React.useState(null);
     const [required,setRequired] = React.useState(false)
 
