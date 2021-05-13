@@ -35,7 +35,7 @@ const Question = (props) => {
         <div>
             <FormControl className={classes.textfield}>
                 <TextField
-                    id={key}
+                    id={`${key}`}
                     label='Question'
                     color='primary'
                     onChange={e => uiHandler({type:'QUE',data:e.target.value})}

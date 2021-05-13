@@ -28,7 +28,7 @@ const Element = (props) => {
             <Question type={type} uiHandler={uiHandler} id={1}/>
             { type === 'ST' && <SmallText required={required} uiHandler={uiHandler}/>}
             { type === 'PG' && <Paragraph required={required} uiHandler={uiHandler}/>}
-            { type === 'SO' && <SingleMCQ key={1} required={required} uiHandler={uiHandler}/>}
+            { type === 'SO' && <SingleMCQ id={1} required={required} uiHandler={uiHandler}/>}
             { type === 'MO' && <MultipleMCQ required={required} uiHandler={uiHandler}/>}
             { type === 'DD' && <ListDD required={required} uiHandler={uiHandler}/>}
             { type === 'FU' && <FileUpload required={required} uiHandler={uiHandler}/>}
