@@ -12,17 +12,17 @@ export const InputTypes = [
     {
         id:3,
         value:'SO',
-        text:'Single option correct'
+        text:'MCQ(single)'
     },
     {
         id:4,
         value:'MO',
-        text:'Multi option correct'
+        text:'MCQ(multi)'
     },
     {
         id:5,
         value:'DD',
-        text:'List'
+        text:'Date/Time'
     },
     {
         id:6,
