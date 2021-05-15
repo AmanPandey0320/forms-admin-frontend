@@ -1,3 +1,5 @@
+import { fileIcons } from '../../assets/data/form'
+
 const editOption = (index,state,uiHandler,option) => (event) => {
     if(event.key === "Enter"){
         let data = [...state.slice(0,index),{id:index+1,text:event.target.value},...state.slice(index+1)];
@@ -26,4 +28,9 @@ const appendOption = (state,uiHandler,option) => (event) => {
     uiHandler({type:'APND_OPTION',data:data});
 }
 
-export {editOption,removeOption,appendOption};
+const mimeTypeIcon = (type)=>{
+    const [sup,sub] = type.split('/');
+    console.log(sup,sub);
+}
+
+export {editOption,removeOption,appendOption,mimeTypeIcon};

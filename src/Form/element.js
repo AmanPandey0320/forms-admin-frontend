@@ -31,7 +31,7 @@ const Element = (props) => {
             { type === 'SO' && <SingleMCQ id={1} required={required} uiHandler={uiHandler}/>}
             { type === 'MO' && <MultipleMCQ required={required} uiHandler={uiHandler}/>}
             { type === 'DD' && <ListDD required={required} uiHandler={uiHandler}/>}
-            { type === 'FU' && <FileUpload required={required} uiHandler={uiHandler}/>}
+            { type === 'FU' && <FileUpload id={1} required={required} uiHandler={uiHandler}/>}
         </BodyElement>
      );
 }

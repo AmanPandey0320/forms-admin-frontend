@@ -17,7 +17,7 @@ const DateTime = (props) => {
     return ( 
         <>
             <FormControl className={classes.formControl} >
-            {console.log(config)}
+            {/* {console.log(config)} */}
                 <FormGroup className={classes.checkbox} >
                     <FormControlLabel color="primary" control={<Checkbox checked={config.one} onChange={e => setConfig({...config,one:e.target.checked})} color="primary" />} label="Date" />
                     <FormControlLabel color="primary" control={<Checkbox checked={config.two} onChange={e => setConfig({...config,two:e.target.checked})} color="primary" />} label="Time" />
