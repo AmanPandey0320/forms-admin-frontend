@@ -9,9 +9,11 @@ import ListDD from './Elements/list';
 import FileUpload from './Elements/fileUpload';
 
 const Element = (props) => {
-    const [type,setType] = React.useState('MO');
+    const [type,setType] = React.useState('ST');
     const [question,setQuestion] = React.useState(null);
-    const [required,setRequired] = React.useState(false)
+    const [required,setRequired] = React.useState(false);
+    const [inputProps,setInputProps] = React.useState(null);
+    const { formHandler } = props;
 
     const uiHandler = (action) => {
         if(action.type === 'IN'){
@@ -20,6 +22,8 @@ const Element = (props) => {
             setQuestion(action.data);
         }else if(action.type === 'REQ'){
             setRequired(action.data);
+        }else if(action.type === 'INPUT'){
+            setInputProps(action.data);
         }
     }
 

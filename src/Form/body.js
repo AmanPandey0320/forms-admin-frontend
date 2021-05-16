@@ -5,7 +5,6 @@ import FormElement from './element';
 
 const Body = (props) => {
     const { color,uiHandler } = props;
-    const {setForm_data} = uiHandler;
     let { data } = props;
     const theme = createMuiTheme({
         palette:{
@@ -17,7 +16,7 @@ const Body = (props) => {
     return ( 
         <BodyWrapper>
             <ThemeProvider theme={theme}>
-                <FormElement/>
+                <FormElement formHandler = {uiHandler}/>
             </ThemeProvider>
         </BodyWrapper>
      );

@@ -12,6 +12,18 @@ const NewTemplate = (props) => {
     const [decs,setDesc] = React.useState('This is the form description');
     const [form_data,setForm_data] = React.useState([]);
 
+    const uiHandler = ({type,data,index}) => {
+        if(type === 'ADD_TO_FORM'){
+            if(index < form_data.length){
+                let new_form_data = form_data;
+                new_form_data[index] = data;
+                setForm_data([...new_form_data])
+            }else{
+                setForm_data([...form_data,data]);
+            }
+        }
+    }
+
     React.useEffect(()=>{
         document.body.style.backgroundColor = bgcolor;
 
@@ -26,7 +38,7 @@ const NewTemplate = (props) => {
         <FormWrapper>
                 <Header bg={header != null ? themes[header].img : null} />
                 <Heading color={color} title={title} decs={decs} uiHandler = {{setDesc,setTitle}} />
-                <Body uiHandler={{setForm_data}} data={form_data} color={color}/>
+                <Body uiHandler={uiHandler} data={form_data} color={color}/>
         </FormWrapper>
      );
 }

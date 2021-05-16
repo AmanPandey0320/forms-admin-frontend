@@ -19,7 +19,7 @@ const Home = (props) => {
     const [component,setComponent] = React.useState('tempalte');
     const [header , setHeader] = React.useState(null);
     const [bgcolor,setBgcolor] = React.useState('#e6f7ff');
-    const [color,setColor] = React.useState('#0099e6')
+    const [color,setColor] = React.useState('#0099e6');
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
