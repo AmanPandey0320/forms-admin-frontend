@@ -16,12 +16,11 @@ const FileUpload = (props) => {
             { file &&
                 <div className={classes.iconWrapper}>
                     <Grid container spacing={1}>
-                        <Grid item>
-                            {fileIcons.text}
-                            {mimeTypeIcon(file.type)}
+                        <Grid className={classes.icon} item>
+                            {mimeTypeIcon(file.type,file.name)}
                         </Grid>
-                        <Grid item>
-                            file name
+                        <Grid className={classes.text} item>
+                            {file.name}
                         </Grid>
                     </Grid>
                 </div>

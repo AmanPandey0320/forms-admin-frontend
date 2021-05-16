@@ -7,9 +7,19 @@ const useStyles = makeStyles( theme =>({
     },
     iconWrapper:{
         marginBottom:theme.spacing(2),
-        width:'max-content',
+        width:'100%',
         float:'left',
-        paddingInline:theme.spacing(1)
+        paddingInline:theme.spacing(1),
+        display:'flex',
+        flexDirection:'row'
+    },
+    icon:{
+        width:'5%',
+        verticalAlign:'middle'
+    },
+    text:{
+        width:'90%',
+        fontSize:'small'
     }
 }));
 
