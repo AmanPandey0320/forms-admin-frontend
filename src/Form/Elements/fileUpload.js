@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, Typography } from '@material-ui/core';
+import { Button, FormControl, Grid,FormControlLabel, Switch, Container } from '@material-ui/core';
 import useStyles from '../../MUIStyles/fileupload';
 import { BsFilePlus } from 'react-icons/bs';
 import { fileIcons } from '../../assets/data/form';
@@ -6,7 +6,7 @@ import { mimeTypeIcon } from './elements.logic'
 import React from 'react';
 
 const FileUpload = (props) => {
-    const {id} = props;
+    const {required,uiHandler,id} = props;
     const classes = useStyles();
     const fileRef = React.useRef();
     const [file,setFile] = React.useState(null);
@@ -30,6 +30,17 @@ const FileUpload = (props) => {
                 {!file && <span>Select file</span>}
                 {file && <span>Change file</span>}
             </Button>
+            <Container>
+                <FormControlLabel
+                    className={classes.switch}
+                    control={<Switch 
+                        checked={required}
+                        color='primary'
+                        onChange={ e => uiHandler({type:'REQ',data:!required})}
+                    />}
+                    label="required"
+                />
+            </Container>
         </FormControl>
      );
 }

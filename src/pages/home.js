@@ -20,6 +20,11 @@ const Home = (props) => {
     const [header , setHeader] = React.useState(null);
     const [bgcolor,setBgcolor] = React.useState('#e6f7ff');
     const [color,setColor] = React.useState('#0099e6');
+    const [form_data,setForm_data] = React.useState([{
+        type:'ST',
+        question:null,
+        required:false
+    }]);
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -34,16 +39,29 @@ const Home = (props) => {
     
         setSettingDrawer(open)
     };
+
+    const uiHandler = ({type,data,index}) => {
+        console.log(type,data,index);
+        if(type === 'ADD_TO_FORM'){
+            if(index < form_data.length){
+                let new_form_data = form_data;
+                new_form_data[index] = data;
+                setForm_data([...new_form_data])
+            }else{
+                setForm_data([...form_data,data]);
+            }
+        }
+    }
     
     return ( 
         <div>
-            <MainAppbar classes={classes} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={component}/>
+            <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={component}/>
             <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer}setComponent={setComponent} component={component}/>
 
             <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
-            
+            {console.log(form_data)}
             { component === 'tempalte' && <Template/>}
-            { component === 'new' && <NewTemplate color={color} bgcolor = {bgcolor} header={header}/>}
+            { component === 'new' && <NewTemplate uiHandler={uiHandler} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
             { component === 'log' && <Logs token = {props.token}/>}
 
         </div>

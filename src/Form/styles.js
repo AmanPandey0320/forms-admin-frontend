@@ -20,7 +20,7 @@ export const HeadingWrapper = styled.div`
 `;
 
 export const BodyElement = styled.div`
-    margin-top: 2px;
+    margin-top: 4px;
     border-width: 0px;
     border-style: solid;
     padding: 16px 16px;

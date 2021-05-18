@@ -8,6 +8,15 @@ const useStyles = makeStyles( theme =>({
     checkbox:{
         display:'flex',
         flexDirection:'row'
+    },
+    switch:{
+        maxWidth:'22%',
+        marginLeft:theme.spacing(2),
+        [theme.breakpoints.down('xs')]:{
+            maxWidth:'90%',
+            marginLeft:0,
+            marginTop:theme.spacing(1)
+        }
     }
 }));
 

@@ -13,17 +13,24 @@ const Element = (props) => {
     const [question,setQuestion] = React.useState(null);
     const [required,setRequired] = React.useState(false);
     const [inputProps,setInputProps] = React.useState(null);
-    const { formHandler } = props;
+    const { formHandler,index,data } = props;
 
     const uiHandler = (action) => {
         if(action.type === 'IN'){
             setType(action.data);
+            formHandler({type:'ADD_TO_FORM',data:{...data,type:action.data},index})
         }else if(action.type === 'QUE'){
             setQuestion(action.data);
+            formHandler({type:'ADD_TO_FORM',data:{...data,question:action.data},index})
         }else if(action.type === 'REQ'){
+            formHandler({type:'ADD_TO_FORM',data:{...data,required:action.data},index})
             setRequired(action.data);
         }else if(action.type === 'INPUT'){
             setInputProps(action.data);
+        }else if(action.type === 'SET_OPTION'){
+            formHandler({type:'ADD_TO_FORM',data:{...data,options:action.data},index})
+        }else if(action.type === 'SET_DATE_TIME'){
+            formHandler({type:'ADD_TO_FORM',data:{...data,date:action.data.one,time:action.data.two},index})
         }
     }
 

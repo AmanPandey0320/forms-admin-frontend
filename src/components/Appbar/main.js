@@ -9,7 +9,16 @@ import { IconContext } from 'react-icons';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const MainAppbar = (props) => {
-    const { classes,toggleDrawer,toggleSettingDrawer,component } = props;
+    const { classes,toggleDrawer,toggleSettingDrawer,component,uiHandler,index } = props;
+    const addBtnClickHandler = () => (e) => {
+        const data = {
+            type:'ST',
+            question:null,
+            required:false
+        }
+        // console.log('clicked');
+        uiHandler({type:'ADD_TO_FORM',data,index});
+    }
     return ( 
         <>
             <AppBar color="primary" position="static">
@@ -23,7 +32,7 @@ const MainAppbar = (props) => {
                     {component === 'new' && <div className={classes.sectionDesktop}>
                         <IconContext.Provider value={{color:'white'}}>
                             <Tooltip title="Add new item">
-                                <IconButton>
+                                <IconButton onClick={addBtnClickHandler()}>
                                     <RiAddFill/>
                                 </IconButton>
                             </Tooltip>
@@ -42,7 +51,7 @@ const MainAppbar = (props) => {
                     {component === 'new' && <div className={classes.sectionMobile}>
                         <IconContext.Provider value={{color:'white'}}>
                             <Tooltip title="Add new item">
-                                <IconButton>
+                                <IconButton onClick={addBtnClickHandler()} >
                                     <RiAddFill/>
                                 </IconButton>
                             </Tooltip>

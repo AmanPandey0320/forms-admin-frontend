@@ -6,7 +6,7 @@ import { editOption,removeOption,appendOption } from './elements.logic'
 
 const MultipleMCQ = (props) => {
     const {required,uiHandler,id:key} = props;
-    const [options,setOptions] = React.useState([{id:1,text:'New option'}]);
+    const [options,setOptions] = React.useState([]);
     const [curr_op,setCurr_op] = React.useState('New option');
     const [value,setValue] = React.useState(`op_no_1_for_${key}`);
     const classes = useStyles();
@@ -15,17 +15,20 @@ const MultipleMCQ = (props) => {
             case 'EDIT_OPTION':{
                 setOptions(data);
                 setCurr_op(data[data.length -1].text)
+                uiHandler({type:'SET_OPTION',data})
                 break;
             }
             case 'REMV_OPTION':{
                 setOptions(data);
                 if(data.length > 0){
                     setCurr_op(data[data.length -1].text)
+                    uiHandler({type:'SET_OPTION',data})
                 }
                 break;
             }
             case 'APND_OPTION':{
                 setOptions(data);
+                uiHandler({type:'SET_OPTION',data})
                 // setCurr_op('New option')
                 break; 
             }

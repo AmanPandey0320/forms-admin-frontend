@@ -20,6 +20,16 @@ const useStyles = makeStyles( theme =>({
     text:{
         width:'90%',
         fontSize:'small'
+    },
+    switch:{
+        maxWidth:'22%',
+        marginLeft:theme.spacing(2),
+        float:'right',
+        [theme.breakpoints.down('xs')]:{
+            maxWidth:'90%',
+            marginLeft:0,
+            marginTop:theme.spacing(1)
+        }
     }
 }));
 
