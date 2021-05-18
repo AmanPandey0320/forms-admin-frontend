@@ -9,3 +9,5 @@ export const addToForm = (form,position,data,uiHandler) => {
 
     uiHandler(newForm);
 }
+
+// export const submit_template = ()

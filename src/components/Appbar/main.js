@@ -19,6 +19,9 @@ const MainAppbar = (props) => {
         // console.log('clicked');
         uiHandler({type:'ADD_TO_FORM',data,index});
     }
+    const sendBtnClickListener = () => (e) => {
+        uiHandler({type:'CREATE_TEMPLATE',data:null,index:null});
+    }
     return ( 
         <>
             <AppBar color="primary" position="static">
@@ -42,7 +45,7 @@ const MainAppbar = (props) => {
                                 </IconButton>
                             </Tooltip>
                             <Tooltip title ="Create">
-                                <IconButton>
+                                <IconButton onClick={sendBtnClickListener()} >
                                     <RiSendPlane2Line/>
                                 </IconButton>
                             </Tooltip>

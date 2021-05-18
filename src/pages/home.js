@@ -41,7 +41,9 @@ const Home = (props) => {
     };
 
     const uiHandler = ({type,data,index}) => {
-        console.log(type,data,index);
+
+        console.log(type,data,index);//logs to be removed in deployment
+
         if(type === 'ADD_TO_FORM'){
             if(index < form_data.length){
                 let new_form_data = form_data;
@@ -50,6 +52,11 @@ const Home = (props) => {
             }else{
                 setForm_data([...form_data,data]);
             }
+        }else if(type === 'CREATE_TEMPLATE'){
+            //submit template to api
+            
+            // const title = document.getElementById('form_title_txt').value;
+            // const description = document.getElementById('form_description_txt').value;
         }
     }
     
