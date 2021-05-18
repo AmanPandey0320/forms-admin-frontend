@@ -29,6 +29,7 @@ export const BodyElement = styled.div`
     display:flex;
     flex-direction:column;
     border-color:#ffffff;
+    box-shadow: 2px 2px 4px #969696;
 `;
 export const BodyWrapper = styled.div`
     margin-top:2px;

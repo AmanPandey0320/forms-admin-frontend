@@ -32,6 +32,10 @@ const SingleMCQ = (props) => {
                 // setCurr_op('New option')
                 break; 
             }
+            default :{
+                alert('unknown form operation');
+                break;
+            }
         }
     }
     return ( 

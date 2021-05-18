@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { display } from 'styled-system';
 
 const useStyles = makeStyles(theme => ({
 

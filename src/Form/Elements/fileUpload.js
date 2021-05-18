@@ -1,7 +1,6 @@
 import { Button, FormControl, Grid,FormControlLabel, Switch, Container } from '@material-ui/core';
 import useStyles from '../../MUIStyles/fileupload';
 import { BsFilePlus } from 'react-icons/bs';
-import { fileIcons } from '../../assets/data/form';
 import { mimeTypeIcon } from './elements.logic'
 import React from 'react';
 

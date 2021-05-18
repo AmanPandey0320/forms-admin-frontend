@@ -12,8 +12,8 @@ const Element = (props) => {
     const [type,setType] = React.useState('ST');
     const [question,setQuestion] = React.useState(null);
     const [required,setRequired] = React.useState(false);
-    const [inputProps,setInputProps] = React.useState(null);
     const { formHandler,index,data } = props;
+
 
     const uiHandler = (action) => {
         if(action.type === 'IN'){
@@ -25,8 +25,6 @@ const Element = (props) => {
         }else if(action.type === 'REQ'){
             formHandler({type:'ADD_TO_FORM',data:{...data,required:action.data},index})
             setRequired(action.data);
-        }else if(action.type === 'INPUT'){
-            setInputProps(action.data);
         }else if(action.type === 'SET_OPTION'){
             formHandler({type:'ADD_TO_FORM',data:{...data,options:action.data},index})
         }else if(action.type === 'SET_DATE_TIME'){
@@ -36,7 +34,7 @@ const Element = (props) => {
 
     return ( 
         <BodyElement>
-            <Question type={type} uiHandler={uiHandler} id={1}/>
+            <Question type={type} question={question} uiHandler={uiHandler} id={1}/>
             { type === 'ST' && <SmallText required={required} uiHandler={uiHandler}/>}
             { type === 'PG' && <Paragraph required={required} uiHandler={uiHandler}/>}
             { type === 'SO' && <SingleMCQ id={1} required={required} uiHandler={uiHandler}/>}
@@ -46,5 +44,5 @@ const Element = (props) => {
         </BodyElement>
      );
 }
- 
+
 export default Element;
