@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 const Logs = (props) => {
     const [logs,setLogs] = useState([]);
 
-    // console.log(props.token);
-
     useEffect(()=>{
         getLog(props.token,{setLogs});
     },[props.token]);

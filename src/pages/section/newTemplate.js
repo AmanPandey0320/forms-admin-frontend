@@ -20,8 +20,6 @@ const NewTemplate = (props) => {
         }
     },[color,bgcolor,header])
 
-    // console.log(title,decs);
-
     return ( 
         <FormWrapper>
                 <Header bg={header != null ? themes[header].img : null} />

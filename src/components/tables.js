@@ -135,7 +135,6 @@ export default function CustomPaginationActionsTable(props) {
             : rows
           ).map((row,index) => (
             <TableRow key={row.log_id}>
-              {console.log(row)}
               <TableCell align="center" width={48}>
                 {page * rowsPerPage+index+1}
               </TableCell>

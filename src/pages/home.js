@@ -55,7 +55,7 @@ const Home = (props) => {
 
     const uiHandler = ({type,data,index}) => {
 
-        console.log(type,data,index);//logs to be removed in deployment
+        // console.log(type,data,index);//logs to be removed in deployment
 
         if(type === 'ADD_TO_FORM'){
             if(index < form_data.length){
