@@ -11,6 +11,7 @@ export const postToBackend = ({endpoint,data,config},callback) => {
     axios.post(baseUrl + endpoint,JSON.stringify(data),config).then(response=>{
         
         response.data.status = 200;
+        // console.log(response);
         return callback(null,response.data);
 
     }).catch(err=>{

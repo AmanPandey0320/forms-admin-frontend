@@ -17,7 +17,7 @@ const Body = (props) => {
         <BodyWrapper>
             <ThemeProvider theme={theme}>
                 {
-                    data.map((element,index)=><FormElement data={element} index={index} formHandler = {uiHandler}/>)
+                    data.map((element,index)=><FormElement key={index} data={element} index={index} formHandler = {uiHandler}/>)
                 }
             </ThemeProvider>
         </BodyWrapper>

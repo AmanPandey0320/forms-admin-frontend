@@ -2,6 +2,10 @@ const HomeStyle =(theme) => ({
     root: {
       flexGrow: 1,
     },
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
