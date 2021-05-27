@@ -14,6 +14,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SnackBar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import UpdateTemplate from './section/view_update';
 
 const useStyles = makeStyles(Styles);
 
@@ -27,6 +28,7 @@ const Home = (props) => {
     const [color,setColor] = React.useState('#0099e6');
     const [backDrop,setBackDrop] = React.useState(false);
     const [snackbar,setSnackbar] = React.useState(false);
+    const [view,setView] = React.useState([]);
     const [error,setError] = React.useState({
         open:false,
         text:'Some Error',
@@ -79,18 +81,30 @@ const Home = (props) => {
                 data:form_data,
                 enabled:true
             }
-            submit_template(data,setBackDrop,setError);
+            console.log(data);
+            submit_template(data,setBackDrop,setError,setComponent,setForm_data);
+            setColor('#0099e6');
+            setBgcolor('#e6f7ff');
+        }else if(type === 'UPDATE_TEMPLATE_DATA'){
+
+        }else if(type === 'UPDATE_TEMPLATE'){
+
+        }else if(type === 'VIEW_TEMPLATE'){
+            setView(data);
+            setComponent('view');
         }
     }
+    console.log(view);
     return ( 
         <div>
             <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={component}/>
             <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer}setComponent={setComponent} component={component}/>
 
             <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
-            { component === 'tempalte' && !backDrop && <Template/>}
+            { component === 'tempalte' && !backDrop && <Template uiHandler={uiHandler} token = {props.token}/>}
             { component === 'new' && !backDrop && <NewTemplate uiHandler={uiHandler} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
             { component === 'log' && !backDrop && <Logs token = {props.token}/>}
+            { component === 'view' && !backDrop && <UpdateTemplate data={view} uiHandler={uiHandler} />}
 
             <Backdrop onClick={()=>{setSnackbar(true)}} className={classes.backdrop} open={backDrop} >
                 <CircularProgress color="primary" />
@@ -126,7 +140,7 @@ const HomeWrapper = (props) => {
 }
 const mapStatetoProps = (state) => {
     return{
-        token:state.user.token
+        token:state.user.token,
     }
 }
 export default connect(mapStatetoProps)(HomeWrapper);

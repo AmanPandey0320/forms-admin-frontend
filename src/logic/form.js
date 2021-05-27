@@ -1,7 +1,12 @@
 import { postToBackend } from "./repository";
-// import  { createStore } from 'redux';
-// import rootReducer from '../Reducers/rootReducer';
-// const store = createStore(rootReducer);
+
+const config = {
+    headers: {
+        'Content-Type' : 'application/json',
+        Authorization: `Bearer forms_jwt_cookie`
+    },
+    withCredentials: true
+}
 
 export const addToForm = (form,position,data,uiHandler) => {
     let newForm = [];
@@ -15,16 +20,9 @@ export const addToForm = (form,position,data,uiHandler) => {
     uiHandler(newForm);
 }
 
-export const submit_template = (data,uiHandler,uiErrorHandler) => {
+export const submit_template = (data,uiHandler,uiErrorHandler,setComponent,setForm_data) => {
     uiHandler(true);
     const endpoint = '/admin/template/create';
-    const config = {
-        headers: {
-            'Content-Type' : 'application/json',
-            Authorization: `Bearer forms_jwt_cookie`
-        },
-        withCredentials: true
-    }
     postToBackend({endpoint,data,config},(err,result)=>{
         uiHandler(false);
         // console.log(err,result);
@@ -35,13 +33,19 @@ export const submit_template = (data,uiHandler,uiErrorHandler) => {
                 text:err.message
             });
         }else{
-            // console.log(result);
+            // console.log(result.message);
             if(result.status === 200){
                 uiErrorHandler({
                     open:true,
                     text:'Template created',
                     type:'success'
                 });
+                setComponent('tempalte');
+                setForm_data([{
+                    type:'ST',
+                    question:null,
+                    required:false
+                }]);
                 // console.log(result);
             }else{
                 uiErrorHandler({
@@ -51,4 +55,21 @@ export const submit_template = (data,uiHandler,uiErrorHandler) => {
             }
         }
     });
+}
+
+export const retrive_template = (auth_token,cb) => {
+    const endpoint = `/admin/template/read`;
+    const data = {auth_token};
+    
+    postToBackend({endpoint,data,config},(error,result)=>{
+        if(error){
+            console.log(error);
+            return cb(error.message);
+        }else{
+            if(result.status === 200){
+                return cb(null,result.message);
+            }
+        }
+        
+    })
 }
