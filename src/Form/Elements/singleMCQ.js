@@ -6,7 +6,7 @@ import { editOption,removeOption,appendOption } from './elements.logic'
 
 const SingleMCQ = (props) => {
     const {required,uiHandler,id:key} = props;
-    const [options,setOptions] = React.useState([]);
+    const [options,setOptions] = React.useState(props.options);
     const [curr_op,setCurr_op] = React.useState('New option');
     const [value,setValue] = React.useState(`op_no_1_for_${key}`);
     const classes = useStyles();

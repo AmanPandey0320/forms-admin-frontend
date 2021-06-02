@@ -9,12 +9,12 @@ const UpdateTemplate = (props) => {
 
     const {data,uiHandler} = props;
     const { color, bgColor:bgcolor,header } = data.theme;
-    const [title,setTitle] = React.useState('Untitled form');
-    const [decs,setDesc] = React.useState('This is the form description');
+    const [title,setTitle] = React.useState(data.title);
+    const [decs,setDesc] = React.useState(data.description);
 
     React.useEffect(()=>{
         document.body.style.backgroundColor = bgcolor;
-        console.log(bgcolor);
+        // console.log(data,title);
 
         return () => {
             document.body.style.backgroundColor = '#ffffff';

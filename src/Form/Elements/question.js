@@ -38,6 +38,7 @@ const Question = (props) => {
                     id={`${key}`}
                     label='Question'
                     color='primary'
+                    defaultValue={props.question}
                     onChange={e => uiHandler({type:'QUE',data:e.target.value})}
                 />
             </FormControl>

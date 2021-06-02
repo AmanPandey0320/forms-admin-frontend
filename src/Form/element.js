@@ -9,10 +9,11 @@ import ListDD from './Elements/list';
 import FileUpload from './Elements/fileUpload';
 
 const Element = (props) => {
-    const [type,setType] = React.useState('ST');
-    const [question,setQuestion] = React.useState(null);
-    const [required,setRequired] = React.useState(false);
     const { formHandler,index,data } = props;
+    console.log(data);
+    const [type,setType] = React.useState(data.type);
+    const [question,setQuestion] = React.useState(data.question);
+    const [required,setRequired] = React.useState(data.required);
 
 
     const uiHandler = (action) => {
@@ -37,8 +38,8 @@ const Element = (props) => {
             <Question type={type} question={question} uiHandler={uiHandler} id={1}/>
             { type === 'ST' && <SmallText required={required} uiHandler={uiHandler}/>}
             { type === 'PG' && <Paragraph required={required} uiHandler={uiHandler}/>}
-            { type === 'SO' && <SingleMCQ id={1} required={required} uiHandler={uiHandler}/>}
-            { type === 'MO' && <MultipleMCQ required={required} uiHandler={uiHandler}/>}
+            { type === 'SO' && <SingleMCQ id={1} options={data.options} required={required} uiHandler={uiHandler}/>}
+            { type === 'MO' && <MultipleMCQ required={required} options={data.options} uiHandler={uiHandler}/>}
             { type === 'DD' && <ListDD required={required} uiHandler={uiHandler}/>}
             { type === 'FU' && <FileUpload id={1} required={required} uiHandler={uiHandler}/>}
         </BodyElement>

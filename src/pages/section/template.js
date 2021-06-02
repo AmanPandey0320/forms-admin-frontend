@@ -11,6 +11,7 @@ const Templates = (props) => {
     React.useEffect(()=>{
         retrive_template(props.token,(err,template) => {
             console.log(template);
+            if(template !== undefined)
             setData(template);
         });
     },[props.token]);

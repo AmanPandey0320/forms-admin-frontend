@@ -24,7 +24,7 @@ const Heading = (props) => {
                     <TextField
                         id="form_title_txt"
                         label="Title"
-                        defaultValue="Untitled form"
+                        defaultValue={props.title}
                         InputProps={{
                             classes: {
                             input: classes.resize,
@@ -39,7 +39,7 @@ const Heading = (props) => {
                     <TextField
                         id="form_description_txt"
                         label="Description"
-                        defaultValue="This is the form description"
+                        defaultValue={props.decs}
                         style={{width:'100%'}}
                         color="primary"
                         onChange={e => setDesc(e.target.value)}
