@@ -73,3 +73,19 @@ export const retrive_template = (auth_token,cb) => {
         
     })
 }
+
+export const addBtnClickHandler = (uiHandler,index) => (e) => {
+    const data = {
+        type:'ST',
+        question:null,
+        required:false
+    }
+    // console.log('clicked');
+    uiHandler({type:'ADD_TO_FORM',data,index});
+}
+export const sendBtnClickListener = (uiHandler) => (e) => {
+    uiHandler({type:'CREATE_TEMPLATE',data:null,index:null});
+}
+export const updateBtnClickListener=(uiHandler)=>(e)=>{
+    uiHandler({type:'UPDATE_TEMPLATE_DATA',data:null,index:null});
+}

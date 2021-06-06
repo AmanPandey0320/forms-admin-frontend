@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
     root:{
         margin:'auto',
         marginTop:"1%",
+        paddingInline:'1%'
     }
 }));
 

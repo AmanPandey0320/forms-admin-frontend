@@ -6,7 +6,7 @@ import { editOption,removeOption,appendOption } from './elements.logic'
 
 const SingleMCQ = (props) => {
     const {required,uiHandler,id:key} = props;
-    const [options,setOptions] = React.useState(props.options);
+    const [options,setOptions] = React.useState(props.options?props.options:[]);
     const [curr_op,setCurr_op] = React.useState('New option');
     const [value,setValue] = React.useState(`op_no_1_for_${key}`);
     const classes = useStyles();
@@ -41,6 +41,7 @@ const SingleMCQ = (props) => {
     return ( 
         <FormControl component="fieldset" className={classes.formControl} >
             <FormLabel component="legend" >Options</FormLabel>
+            {console.log(options)}
             <RadioGroup color="primary" value={value} onChange={e=> setValue(e.target.value)} aria-label="options" name={`op_for_${key}`} >
                 {
                     options.map( (option,index) => <FormControlLabel key={`op_no_${index+1}${option.id}_for_${key}`} control={<Radio value={`op_no_${index+1}_for_${key}`} color="primary"/>} label={<span><TextField helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>} onChange={e => setCurr_op(e.target.value)} defaultValue={option.text} onKeyDown={editOption(index,options,this_uiHandler,curr_op)} placeholder="New option" color="primary"/><IconButton onClick={removeOption(index,options,this_uiHandler)} color="primary"><MdCancel/></IconButton></span>}/>)

@@ -1,7 +1,7 @@
 import { postToBackend } from "./repository";
 
 
-export const getLog = (token,{setLogs}) => {
+export const getLog = (token,cb) => {
     const endpoint = `/admin/logs/get`;
     const data = {
         auth_token:token
@@ -17,8 +17,9 @@ export const getLog = (token,{setLogs}) => {
     postToBackend({endpoint,data,config},(err,info)=>{
         if(err){
             console.log(err);
+            return cb(err.message)
         }else{
-            setLogs(info.msg);
+            return cb(null,info.msg);
         }
     });
 }

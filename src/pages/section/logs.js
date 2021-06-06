@@ -7,7 +7,20 @@ const Logs = (props) => {
     const [logs,setLogs] = useState([]);
 
     useEffect(()=>{
-        getLog(props.token,{setLogs});
+        let mount = true;
+        getLog(props.token,(err,info)=>{
+            if(err){
+                alert(err)
+            }else{
+                if(mount){
+                    setLogs(info)
+                }
+            }
+        });
+        return ()=>{
+            mount=false;
+        }
+
     },[props.token]);
     console.log(logs);
     return ( 

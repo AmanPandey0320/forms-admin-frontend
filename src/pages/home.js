@@ -86,7 +86,7 @@ const Home = (props) => {
             setColor('#0099e6');
             setBgcolor('#e6f7ff');
         }else if(type === 'UPDATE_TEMPLATE_DATA'){
-
+            alert('updating template');
         }else if(type === 'UPDATE_TEMPLATE'){
 
         }else if(type === 'VIEW_TEMPLATE'){

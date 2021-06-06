@@ -63,7 +63,7 @@ const Login = () => {
                     </CardContent>
                     <CardAction>
                         <div style={{margin:'auto'}}>
-                            <Button variant="contained" onClick = {()=>{setBackDrop(true);setTimeout(()=>loginBtnClickHandler(history,username,password,uiState),5000)}} color="primary"><AiOutlineLogin/>&nbsp;&nbsp;Login</Button>
+                            <Button variant="contained" onClick = {()=>{setBackDrop(true);setTimeout(()=>loginBtnClickHandler(history,username,password,uiState),1)}} color="primary"><AiOutlineLogin/>&nbsp;&nbsp;Login</Button>
                         </div>
                     </CardAction>
                 </Card>

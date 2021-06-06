@@ -9,11 +9,15 @@ const Templates = (props) => {
     const [data,setData] = React.useState([])
 
     React.useEffect(()=>{
+        let mount=true;
         retrive_template(props.token,(err,template) => {
             console.log(template);
-            if(template !== undefined)
+            if(template !== undefined && mount === true)
             setData(template);
         });
+        return ()=>{
+            mount=false;
+        }
     },[props.token]);
 
     const {uiHandler} = props;

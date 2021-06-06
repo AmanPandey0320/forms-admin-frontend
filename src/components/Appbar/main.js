@@ -7,21 +7,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { RiSettingsLine,RiSendPlane2Line,RiAddFill } from 'react-icons/ri';
 import { IconContext } from 'react-icons';
 import Tooltip from '@material-ui/core/Tooltip';
+import { MdUpdate } from 'react-icons/md';
+import { addBtnClickHandler,sendBtnClickListener,updateBtnClickListener } from '../../logic/form'
 
 const MainAppbar = (props) => {
     const { classes,toggleDrawer,toggleSettingDrawer,component,uiHandler,index } = props;
-    const addBtnClickHandler = () => (e) => {
-        const data = {
-            type:'ST',
-            question:null,
-            required:false
-        }
-        // console.log('clicked');
-        uiHandler({type:'ADD_TO_FORM',data,index});
-    }
-    const sendBtnClickListener = () => (e) => {
-        uiHandler({type:'CREATE_TEMPLATE',data:null,index:null});
-    }
     return ( 
         <>
             <AppBar color="primary" position="static">
@@ -32,10 +22,10 @@ const MainAppbar = (props) => {
                     <Typography variant="h6" className={classes.title}>
                         Admin Panel
                     </Typography>
-                    {component === 'new' && <div className={classes.sectionDesktop}>
+                     <div className={classes.sectionDesktop}>
                         <IconContext.Provider value={{color:'white'}}>
                             <Tooltip title="Add new item">
-                                <IconButton onClick={addBtnClickHandler()}>
+                                <IconButton onClick={addBtnClickHandler(uiHandler,index)}>
                                     <RiAddFill/>
                                 </IconButton>
                             </Tooltip>
@@ -44,18 +34,34 @@ const MainAppbar = (props) => {
                                     <RiSettingsLine/>
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title ="Create">
-                                <IconButton onClick={sendBtnClickListener()} >
+                            {component === 'new' &&<Tooltip title ="Create">
+                                <IconButton onClick={sendBtnClickListener(uiHandler)} >
                                     <RiSendPlane2Line/>
+                                </IconButton>
+                            </Tooltip>}
+                            {
+                                component==='view' && <Tooltip title="Update template">
+                                    <IconButton onClick={updateBtnClickListener(uiHandler)} >
+                                        <MdUpdate/>
+                                    </IconButton>
+                                </Tooltip>
+                            }
+                        </IconContext.Provider>
+                    </div>
+                    {component === 'new' && <div className={classes.sectionMobile}>
+                        <IconContext.Provider value={{color:'white'}}>
+                            <Tooltip title="Add new item">
+                                <IconButton onClick={addBtnClickHandler(uiHandler,index)} >
+                                    <RiAddFill/>
                                 </IconButton>
                             </Tooltip>
                         </IconContext.Provider>
                     </div>}
-                    {component === 'new' && <div className={classes.sectionMobile}>
+                    {component === 'view' && <div className={classes.sectionMobile}>
                         <IconContext.Provider value={{color:'white'}}>
-                            <Tooltip title="Add new item">
-                                <IconButton onClick={addBtnClickHandler()} >
-                                    <RiAddFill/>
+                            <Tooltip title="Update template">
+                                <IconButton onClick={updateBtnClickListener(uiHandler)} >
+                                    <MdUpdate/>
                                 </IconButton>
                             </Tooltip>
                         </IconContext.Provider>

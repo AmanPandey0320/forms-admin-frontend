@@ -4,7 +4,8 @@ import {
     borderColor,
     color,
     fontSize,
-    padding
+    padding,
+    
 } from 'styled-system';
 
 export const ThumbnailWrapper = styled.div`
@@ -16,11 +17,14 @@ export const ThumbnailWrapper = styled.div`
     box-shadow: 2px 2px 6px grey;
     :hover{
         cursor:pointer;
-    }
+    };
+    max-width:144px;
 `;
 
 export const AvatarWrapper = styled.div`
-    ${padding}
+    margin:auto;
+    ${padding};
+    text-align:center;
 `;
 
 export const TitleWrapper = styled.div`
@@ -30,7 +34,20 @@ export const TitleWrapper = styled.div`
     border-width:0px;
     border-radius:2px;
     border-color:grey;
-    padding:4px 6px
+    padding:4px 6px;
+    text-overflow:ellipsis;
+    overflow: hidden; 
+    &:hover:{
+        overflow: visible;
+    }
+`;
+export const Span = styled.span`
+    text-overflow:ellipsis;
+    overflow: hidden; 
+    &:hover:{
+        overflow: visible;
+    };
+    vertical-align:top;
 `;
 export const Small = styled('span')(
     fontSize,
