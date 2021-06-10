@@ -11,24 +11,26 @@ import { HiTemplate } from 'react-icons/hi';
 import { CgTemplate } from 'react-icons/cg';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { RiSettingsLine,RiSendPlane2Line} from 'react-icons/ri';
+import { useHistory } from 'react-router';
 
 const MainDrawer = (props) => {
     const { classes,drawer,toggleDrawer,toggleSettingDrawer,setComponent,component } = props
+    const history = useHistory();
     return ( 
         <>
             <React.Fragment >
                 <Drawer anchor='left' open={drawer} onClose={toggleDrawer(false)}>
                     <div className={clsx(classes.list)} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
                         <List>
-                            <ListItem onClick={()=>{setComponent('tempalte')}} button>
+                            <ListItem onClick={()=>{history.push('/home/template')}} button>
                                 <ListItemIcon><HiTemplate/></ListItemIcon>
                                 <ListItemText>Templates</ListItemText>
                             </ListItem>
-                            <ListItem onClick={()=>{setComponent('new')}} button>
+                            <ListItem onClick={()=>{history.push('/home/new-template')}} button>
                                 <ListItemIcon><CgTemplate/></ListItemIcon>
                                 <ListItemText>New Template</ListItemText>
                             </ListItem>
-                            <ListItem onClick={()=>{setComponent('log')}} button>
+                            <ListItem onClick={()=>{history.push('/home/logs')}} button>
                                 <ListItemIcon><GrDatabase/></ListItemIcon>
                                 <ListItemText>Logs</ListItemText>
                             </ListItem>

@@ -9,9 +9,11 @@ import { IconContext } from 'react-icons';
 import Tooltip from '@material-ui/core/Tooltip';
 import { MdUpdate } from 'react-icons/md';
 import { addBtnClickHandler,sendBtnClickListener,updateBtnClickListener } from '../../logic/form'
+import { Menu } from '@material-ui/core';
 
 const MainAppbar = (props) => {
     const { classes,toggleDrawer,toggleSettingDrawer,component,uiHandler,index } = props;
+    const [anchor,setAnchor] = React.useState(null);
     return ( 
         <>
             <AppBar color="primary" position="static">
@@ -24,7 +26,7 @@ const MainAppbar = (props) => {
                     </Typography>
                      <div className={classes.sectionDesktop}>
                         <IconContext.Provider value={{color:'white'}}>
-                            <Tooltip title="Add new item">
+                        {component === 'new-template' &&<><Tooltip title="Add new item">
                                 <IconButton onClick={addBtnClickHandler(uiHandler,index)}>
                                     <RiAddFill/>
                                 </IconButton>
@@ -34,13 +36,13 @@ const MainAppbar = (props) => {
                                     <RiSettingsLine/>
                                 </IconButton>
                             </Tooltip>
-                            {component === 'new' &&<Tooltip title ="Create">
+                            <Tooltip title ="Create">
                                 <IconButton onClick={sendBtnClickListener(uiHandler)} >
                                     <RiSendPlane2Line/>
                                 </IconButton>
-                            </Tooltip>}
+                            </Tooltip></>}
                             {
-                                component==='view' && <Tooltip title="Update template">
+                                component==='view-template' && <Tooltip title="Update template">
                                     <IconButton onClick={updateBtnClickListener(uiHandler)} >
                                         <MdUpdate/>
                                     </IconButton>
@@ -48,7 +50,7 @@ const MainAppbar = (props) => {
                             }
                         </IconContext.Provider>
                     </div>
-                    {component === 'new' && <div className={classes.sectionMobile}>
+                    {component === 'new-template' && <div className={classes.sectionMobile}>
                         <IconContext.Provider value={{color:'white'}}>
                             <Tooltip title="Add new item">
                                 <IconButton onClick={addBtnClickHandler(uiHandler,index)} >
@@ -57,7 +59,7 @@ const MainAppbar = (props) => {
                             </Tooltip>
                         </IconContext.Provider>
                     </div>}
-                    {component === 'view' && <div className={classes.sectionMobile}>
+                    {component === 'view-template' && <div className={classes.sectionMobile}>
                         <IconContext.Provider value={{color:'white'}}>
                             <Tooltip title="Update template">
                                 <IconButton onClick={updateBtnClickListener(uiHandler)} >
@@ -68,6 +70,9 @@ const MainAppbar = (props) => {
                     </div>}
                 </Toolbar>
             </AppBar>
+            <Menu>
+
+            </Menu>
         </>
      );
 }

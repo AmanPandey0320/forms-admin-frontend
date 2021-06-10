@@ -4,7 +4,7 @@ import Logs from './section/logs';
 import NewTemplate from './section/newTemplate';
 import Template from './section/template';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import SettingDrawer from '../components/Drawer/settings';
 import MainDrawer from '../components/Drawer/main';
 import Styles from '../assets/styles/home';
@@ -20,6 +20,8 @@ const useStyles = makeStyles(Styles);
 
 const Home = (props) => {
     const classes = useStyles();
+    const params = useParams();
+    const history = useHistory();
     const [drawer,setDrawer] = React.useState(false);
     const [settingDrawer,setSettingDrawer] = React.useState(false);
     const [component,setComponent] = React.useState('tempalte');
@@ -40,6 +42,7 @@ const Home = (props) => {
         question:null,
         required:false
     }]);
+    const [noe,setNoe]=React.useState(['ST']);
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -82,7 +85,7 @@ const Home = (props) => {
                 enabled:true
             }
             console.log(data);
-            submit_template(data,setBackDrop,setError,setComponent,setForm_data);
+            submit_template(data,setBackDrop,setError,history,setForm_data);
             setColor('#0099e6');
             setBgcolor('#e6f7ff');
         }else if(type === 'UPDATE_TEMPLATE_DATA'){
@@ -91,20 +94,22 @@ const Home = (props) => {
 
         }else if(type === 'VIEW_TEMPLATE'){
             setView(data);
-            setComponent('view');
+            history.push('/home/view-template')
+        }else if(type === 'APPEND_ELEMENT'){
+            setNoe([...noe,data]);
         }
     }
     console.log(view);
     return ( 
         <div>
-            <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={component}/>
-            <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer}setComponent={setComponent} component={component}/>
+            <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={params.type}/>
+            <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer}setComponent={setComponent} component={params.type}/>
 
             <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
-            { component === 'tempalte' && !backDrop && <Template uiHandler={uiHandler} token = {props.token}/>}
-            { component === 'new' && !backDrop && <NewTemplate uiHandler={uiHandler} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
-            { component === 'log' && !backDrop && <Logs token = {props.token}/>}
-            { component === 'view' && !backDrop && <UpdateTemplate data={view} uiHandler={uiHandler} />}
+            { params.type === 'template' && !backDrop && <Template uiHandler={uiHandler} token = {props.token}/>}
+            { params.type === 'new-template' && !backDrop && <NewTemplate uiHandler={uiHandler} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
+            { params.type === 'logs' && !backDrop && <Logs token = {props.token}/>}
+            { params.type === 'view-template' && !backDrop && <UpdateTemplate data={view} uiHandler={uiHandler} />}
 
             <Backdrop onClick={()=>{setSnackbar(true)}} className={classes.backdrop} open={backDrop} >
                 <CircularProgress color="primary" />

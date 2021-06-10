@@ -3,22 +3,25 @@ import { retrive_template } from '../../logic/form';
 import { Container, Grid } from '@material-ui/core';
 import useStyles from '../../assets/styles/template';
 import Thumbnail from '../../components/formThumbnail/index';
+import { useSelector,useDispatch } from 'react-redux'
 
 const Templates = (props) => {
     const classes = useStyles();
-    const [data,setData] = React.useState([])
+    const data = useSelector(state => state.template.forms);
+    const dispatch  = useDispatch();
 
     React.useEffect(()=>{
         let mount=true;
         retrive_template(props.token,(err,template) => {
             console.log(template);
-            if(template !== undefined && mount === true)
-            setData(template);
+            if(template !== undefined && mount === true){
+                dispatch({type:'SET_DATA',forms:template});
+            }
         });
         return ()=>{
             mount=false;
         }
-    },[props.token]);
+    },[props.token,dispatch]);
 
     const {uiHandler} = props;
 

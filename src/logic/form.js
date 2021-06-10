@@ -20,7 +20,7 @@ export const addToForm = (form,position,data,uiHandler) => {
     uiHandler(newForm);
 }
 
-export const submit_template = (data,uiHandler,uiErrorHandler,setComponent,setForm_data) => {
+export const submit_template = (data,uiHandler,uiErrorHandler,history,setForm_data) => {
     uiHandler(true);
     const endpoint = '/admin/template/create';
     postToBackend({endpoint,data,config},(err,result)=>{
@@ -40,7 +40,7 @@ export const submit_template = (data,uiHandler,uiErrorHandler,setComponent,setFo
                     text:'Template created',
                     type:'success'
                 });
-                setComponent('tempalte');
+                history.push('/home/template')
                 setForm_data([{
                     type:'ST',
                     question:null,

@@ -25,7 +25,7 @@ export const loginBtnClickHandler = (history,username,password,{setBackDrop,setE
             // console.log(result);
             if(result.ok){
                 store.dispatch({type:'SET_USER',token:result.auth_token})
-                history.push('/home');
+                history.push('/home/template');
             }else{
                 setBackDrop(false);
                 setError({
