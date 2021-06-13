@@ -94,7 +94,7 @@ const Home = (props) => {
 
         }else if(type === 'VIEW_TEMPLATE'){
             setView(data);
-            history.push('/home/view-template')
+            history.push(`/home/view-template?id=${data.template_id}`)
         }else if(type === 'APPEND_ELEMENT'){
             setNoe([...noe,data]);
         }
@@ -109,7 +109,7 @@ const Home = (props) => {
             { params.type === 'template' && !backDrop && <Template uiHandler={uiHandler} token = {props.token}/>}
             { params.type === 'new-template' && !backDrop && <NewTemplate uiHandler={uiHandler} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
             { params.type === 'logs' && !backDrop && <Logs token = {props.token}/>}
-            { params.type === 'view-template' && !backDrop && <UpdateTemplate data={view} uiHandler={uiHandler} />}
+            { params.type === 'view-template' && !backDrop && <UpdateTemplate token = {props.token} bgcolor={view.theme.bgColor} uiHandler={uiHandler} />}
 
             <Backdrop onClick={()=>{setSnackbar(true)}} className={classes.backdrop} open={backDrop} >
                 <CircularProgress color="primary" />

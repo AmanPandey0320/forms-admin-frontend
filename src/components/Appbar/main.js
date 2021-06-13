@@ -9,11 +9,9 @@ import { IconContext } from 'react-icons';
 import Tooltip from '@material-ui/core/Tooltip';
 import { MdUpdate } from 'react-icons/md';
 import { addBtnClickHandler,sendBtnClickListener,updateBtnClickListener } from '../../logic/form'
-import { Menu } from '@material-ui/core';
 
 const MainAppbar = (props) => {
     const { classes,toggleDrawer,toggleSettingDrawer,component,uiHandler,index } = props;
-    const [anchor,setAnchor] = React.useState(null);
     return ( 
         <>
             <AppBar color="primary" position="static">
@@ -70,9 +68,6 @@ const MainAppbar = (props) => {
                     </div>}
                 </Toolbar>
             </AppBar>
-            <Menu>
-
-            </Menu>
         </>
      );
 }

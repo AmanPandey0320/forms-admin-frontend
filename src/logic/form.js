@@ -74,6 +74,31 @@ export const retrive_template = (auth_token,cb) => {
     })
 }
 
+export const getOneTemplate = (id,auth_token) => {
+    return new Promise((resolve,reject)=>{
+        const endpoint = `/admin/template/read-one`;
+        const data = {auth_token,id};
+        postToBackend({endpoint,data,config},(error,result)=>{
+            if(error){
+                console.log(error);
+                return reject({
+                    data:[],
+                    message:error.message
+                });
+            }else{
+                if(result.status === 200){
+                    return resolve(result.data)
+                }else{
+                    return reject({
+                        data:{},
+                        message:'Some unknown error occured!'
+                    });
+                }
+            }
+        })
+    })
+}
+
 export const addBtnClickHandler = (uiHandler,index) => (e) => {
     const data = {
         type:'ST',
