@@ -30,3 +30,18 @@ export const swatchHandler = (setColor) => (color,event) => {
     setColor(color.hex);
 
 }
+
+export const formCreator = (noe) => {
+    let formdata = [];
+    noe.forEach((toe,index)=> {
+        const que = document.getElementById(`QUE_${index}`).value;
+        const req = document.getElementById(`REQ_${index}`).checked;
+        let data = {
+            question:que,
+            required:req,
+            type:toe
+        }
+        formdata.push(data)
+    });
+    console.log(formdata);
+}

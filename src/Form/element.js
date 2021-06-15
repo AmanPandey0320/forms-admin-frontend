@@ -9,9 +9,9 @@ import ListDD from './Elements/list';
 import FileUpload from './Elements/fileUpload';
 
 const Element = (props) => {
-    const { formHandler,index,data } = props;
+    const { formHandler,index,data,toe } = props;
     console.log(data);
-    const [type,setType] = React.useState(data.type);
+    const [type,setType] = React.useState(toe);
     const [question,setQuestion] = React.useState(data.question);
     const [required,setRequired] = React.useState(data.required);
 
@@ -35,13 +35,13 @@ const Element = (props) => {
 
     return ( 
         <BodyElement>
-            <Question type={type} question={question} uiHandler={uiHandler} id={1}/>
-            { type === 'ST' && <SmallText required={required} uiHandler={uiHandler}/>}
-            { type === 'PG' && <Paragraph required={required} uiHandler={uiHandler}/>}
-            { type === 'SO' && <SingleMCQ id={1} options={data.options} required={required} uiHandler={uiHandler}/>}
-            { type === 'MO' && <MultipleMCQ required={required} options={data.options} uiHandler={uiHandler}/>}
-            { type === 'DD' && <ListDD required={required} uiHandler={uiHandler}/>}
-            { type === 'FU' && <FileUpload id={1} required={required} uiHandler={uiHandler}/>}
+            <Question type={type} question={question} elid={`QUE_${index}`} uiHandler={uiHandler}/>
+            { type === 'ST' && <SmallText required={required} elid={`${type}_${index}`} index={index}  uiHandler={uiHandler}/>}
+            { type === 'PG' && <Paragraph required={required} elid={`${type}_${index}`} index={index} uiHandler={uiHandler}/>}
+            { type === 'SO' && <SingleMCQ options={data.options} elid={`${type}_${index}`} index={index} required={required} uiHandler={uiHandler}/>}
+            { type === 'MO' && <MultipleMCQ required={required} elid={`${type}_${index}`} index={index} options={data.options} uiHandler={uiHandler}/>}
+            { type === 'DD' && <ListDD required={required} elid={`${type}_${index}`} index={index} uiHandler={uiHandler}/>}
+            { type === 'FU' && <FileUpload id={1} required={required} elid={`${type}_${index}`} index={index} uiHandler={uiHandler}/>}
         </BodyElement>
      );
 }

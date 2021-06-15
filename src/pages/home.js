@@ -15,6 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import SnackBar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import UpdateTemplate from './section/view_update';
+import { formCreator } from '../logic/home';
 
 const useStyles = makeStyles(Styles);
 
@@ -65,9 +66,13 @@ const Home = (props) => {
         if(type === 'ADD_TO_FORM'){
             if(index < form_data.length){
                 let new_form_data = form_data;
+                let new_noe=noe;
                 new_form_data[index] = data;
+                new_noe[index]=data.type;
+                setNoe([...new_noe]);
                 setForm_data([...new_form_data])
             }else{
+                setNoe([...noe,data.type]);
                 setForm_data([...form_data,data]);
             }
         }else if(type === 'CREATE_TEMPLATE'){
@@ -97,17 +102,19 @@ const Home = (props) => {
             history.push(`/home/view-template?id=${data.template_id}`)
         }else if(type === 'APPEND_ELEMENT'){
             setNoe([...noe,data]);
+        }else if(type === 'TEST'){
+            formCreator(noe);
         }
     }
-    console.log(view);
-    return ( 
+    console.log(noe);
+    return (
         <div>
             <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={params.type}/>
             <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer}setComponent={setComponent} component={params.type}/>
 
             <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             { params.type === 'template' && !backDrop && <Template uiHandler={uiHandler} token = {props.token}/>}
-            { params.type === 'new-template' && !backDrop && <NewTemplate uiHandler={uiHandler} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
+            { params.type === 'new-template' && !backDrop && <NewTemplate uiHandler={uiHandler} noe={noe} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
             { params.type === 'logs' && !backDrop && <Logs token = {props.token}/>}
             { params.type === 'view-template' && !backDrop && <UpdateTemplate token = {props.token} bgcolor={view.theme.bgColor} uiHandler={uiHandler} />}
 

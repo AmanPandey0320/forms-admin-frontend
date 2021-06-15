@@ -7,7 +7,7 @@ import Body from '../../Form/body';
 
 const NewTemplate = (props) => {
 
-    const { color, bgcolor,header } = props;
+    const { color, bgcolor,header,noe } = props;
     const [title,setTitle] = React.useState('Untitled form');
     const [decs,setDesc] = React.useState('This is the form description');
     const {data,uiHandler} = props;
@@ -24,7 +24,7 @@ const NewTemplate = (props) => {
         <FormWrapper>
                 <Header bg={header != null ? themes[header].img : null} />
                 <Heading color={color} title={title} decs={decs} uiHandler = {{setDesc,setTitle}} />
-                <Body uiHandler={uiHandler} data={data} color={color}/>
+                <Body uiHandler={uiHandler} noe={noe} data={data} color={color}/>
         </FormWrapper>
      );
 }

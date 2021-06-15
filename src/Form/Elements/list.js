@@ -14,7 +14,7 @@ const DateTime = (props) => {
     const [config,setConfig] = React.useState({one:true,two:true});
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [selectedTime, setSelectedTime] = React.useState(new Date());
-    const {required,uiHandler} = props;
+    const {required,uiHandler,elid,index} = props;
     const this_uiHandler = (type) => (e) => {
         console.log(type);
         if(type === 'ONE'){
@@ -38,6 +38,7 @@ const DateTime = (props) => {
                         control={<Switch 
                             checked={required}
                             color='primary'
+                            id={`REQ_${index}`}
                             onChange={ e => uiHandler({type:'REQ',data:!required})}
                         />}
                         label="required"

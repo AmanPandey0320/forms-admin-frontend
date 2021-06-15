@@ -5,13 +5,13 @@ import { mimeTypeIcon } from './elements.logic'
 import React from 'react';
 
 const FileUpload = (props) => {
-    const {required,uiHandler,id} = props;
+    const {required,uiHandler,elid,index} = props;
     const classes = useStyles();
     const fileRef = React.useRef();
     const [file,setFile] = React.useState(null);
     return ( 
         <FormControl className={classes.formControl} >
-            <input hidden ref={fileRef} type="file" id={`${id}`} name="file" onChange={e => setFile(e.target.files[0])}/>
+            <input hidden ref={fileRef} type="file" id={`${elid}`} name="file" onChange={e => setFile(e.target.files[0])}/>
             { file &&
                 <div className={classes.iconWrapper}>
                     <Grid container spacing={1}>
@@ -35,6 +35,7 @@ const FileUpload = (props) => {
                     control={<Switch 
                         checked={required}
                         color='primary'
+                        id={`REQ_${index}`}
                         onChange={ e => uiHandler({type:'REQ',data:!required})}
                     />}
                     label="required"

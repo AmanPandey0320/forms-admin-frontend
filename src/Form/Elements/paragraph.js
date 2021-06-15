@@ -6,7 +6,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 
  const ParaGraph = (props) => {
      const classes = useStyles();
-     const {required,uiHandler} = props;
+     const {required,uiHandler,elid,index} = props;
      return ( 
          <FormControl className={classes.formControl}>
              
@@ -14,6 +14,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
                 className={classes.textField}
                 label="Your answer here"
                 multiline
+                id={elid}
                 variant="outlined"
                 rows={3}
              />
@@ -22,6 +23,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
                 control={<Switch 
                     checked={required}
                     color='primary'
+                    id={`REQ_${index}`}
                     onChange={ e => uiHandler({type:'REQ',data:!required})}
                  />}
                  label="required"

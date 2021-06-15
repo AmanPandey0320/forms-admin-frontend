@@ -5,7 +5,7 @@ import { MdAddBox,MdCancel } from 'react-icons/md';
 import { editOption,removeOption,appendOption } from './elements.logic'
 
 const MultipleMCQ = (props) => {
-    const {required,uiHandler,id:key} = props;
+    const {required,uiHandler,elid:key,index} = props;
     const [options,setOptions] = React.useState([]);
     const [curr_op,setCurr_op] = React.useState('New option');
     const [value,setValue] = React.useState(`op_no_1_for_${key}`);
@@ -41,9 +41,9 @@ const MultipleMCQ = (props) => {
     return ( 
         <FormControl component="fieldset" className={classes.formControl} >
             <FormLabel component="legend" >Options</FormLabel>
-            <FormGroup color="primary" value={value} onChange={e=> setValue(e.target.value)} aria-label="options" name={`op_for_${key}`} >
+            <FormGroup color="primary" value={value} onChange={e=> setValue(e.target.value)} aria-label="options" >
                 {
-                    options.map( (option,index) => <FormControlLabel key={`op_no_${index+1}${option.id}_for_${key}`} control={<Checkbox value={`op_no_${index+1}_for_${key}`} color="primary"/>} label={<span><TextField helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>} onChange={e => setCurr_op(e.target.value)} defaultValue={option.text} onKeyDown={editOption(index,options,this_uiHandler,curr_op)} placeholder="New option" color="primary"/><IconButton onClick={removeOption(index,options,this_uiHandler)} color="primary"><MdCancel/></IconButton></span>}/>)
+                    options.map( (option,index) => <FormControlLabel key={`op_no_${index+1}${option.id}_for_${key}`} control={<Checkbox name={key} value={`op_no_${index+1}_for_${key}`} color="primary"/>} label={<span><TextField id={`${key}_OP_${index}`} helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>} onChange={e => setCurr_op(e.target.value)} defaultValue={option.text} onKeyDown={editOption(index,options,this_uiHandler,curr_op)} placeholder="New option" color="primary"/><IconButton onClick={removeOption(index,options,this_uiHandler)} color="primary"><MdCancel/></IconButton></span>}/>)
                 }
                 <FormControlLabel control={<Checkbox disabled color="primary"/>} label={<span><TextField defaultValue="Add option" disabled color="primary"/><IconButton onClick={ appendOption(options,this_uiHandler,curr_op) } color="primary"><MdAddBox/></IconButton></span>}/>
             </FormGroup>
@@ -52,6 +52,7 @@ const MultipleMCQ = (props) => {
                 control={<Switch 
                     checked={required}
                     color='primary'
+                    id={`REQ_${index}`}
                     onChange={ e => uiHandler({type:'REQ',data:!required})}
                  />}
                  label="required"

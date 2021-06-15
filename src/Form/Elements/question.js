@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Question = (props) => {
-    const { id : key,uiHandler,type:value } = props;
+    const { elid : key,uiHandler,type:value } = props;
     const classes = useStyles();
     // console.log(props);
     return ( 
@@ -39,7 +39,6 @@ const Question = (props) => {
                     label='Question'
                     color='primary'
                     defaultValue={props.question}
-                    onChange={e => uiHandler({type:'QUE',data:e.target.value})}
                 />
             </FormControl>
             <FormControl className={classes.formControl}>

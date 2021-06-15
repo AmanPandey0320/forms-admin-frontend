@@ -6,11 +6,12 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 
  const SmallText = (props) => {
      const classes = useStyles();
-     const {required,uiHandler} = props;
+     const {required,uiHandler,elid,index} = props;
      return ( 
          <FormControl className={classes.formControl}>
              
              <TextField
+                id={elid}
                 className={classes.textField}
                 placeholder="Your answer here"
              />
@@ -18,6 +19,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
                 className={classes.switch}
                 control={<Switch 
                     checked={required}
+                    id={`REQ_${index}`}
                     color='primary'
                     onChange={ e => uiHandler({type:'REQ',data:!required})}
                  />}

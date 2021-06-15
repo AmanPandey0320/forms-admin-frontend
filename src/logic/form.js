@@ -109,7 +109,7 @@ export const addBtnClickHandler = (uiHandler,index) => (e) => {
     uiHandler({type:'ADD_TO_FORM',data,index});
 }
 export const sendBtnClickListener = (uiHandler) => (e) => {
-    uiHandler({type:'CREATE_TEMPLATE',data:null,index:null});
+    uiHandler({type:'TEST',data:null,index:null});
 }
 export const updateBtnClickListener=(uiHandler)=>(e)=>{
     uiHandler({type:'UPDATE_TEMPLATE_DATA',data:null,index:null});

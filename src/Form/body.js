@@ -4,7 +4,7 @@ import { createMuiTheme,ThemeProvider } from '@material-ui/core/styles';
 import FormElement from './element';
 
 const Body = (props) => {
-    const { color,uiHandler } = props;
+    const { color,uiHandler,noe } = props;
     let { data } = props;
     const theme = createMuiTheme({
         palette:{
@@ -17,7 +17,7 @@ const Body = (props) => {
         <BodyWrapper>
             <ThemeProvider theme={theme}>
                 {
-                    data.map((element,index)=><FormElement key={index} data={element} index={index} formHandler = {uiHandler}/>)
+                    data.map((element,index)=><FormElement key={index} toe={noe[index]} data={element} index={index} formHandler = {uiHandler}/>)
                 }
             </ThemeProvider>
         </BodyWrapper>
