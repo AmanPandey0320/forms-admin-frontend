@@ -42,7 +42,7 @@ const UpdateTemplate = (props) => {
         return () => {
             document.body.style.backgroundColor = '#ffffff';
         }
-    },[queryParams,bgcolor])
+    },[])
 
     if(data === null ){
         return(
