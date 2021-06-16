@@ -2,40 +2,34 @@ import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField,
 import React from 'react';
 import useStyles from '../../MUIStyles/singleMCQ';
 import { MdAddBox,MdCancel } from 'react-icons/md';
-import { editOption,removeOption,appendOption } from './elements.logic'
 
 const SingleMCQ = (props) => {
-    const {required,uiHandler,elid:key,index} = props;
+    const {required,elid:key,index} = props;
     const [options,setOptions] = React.useState(props.options?props.options:[]);
-    const [curr_op,setCurr_op] = React.useState('New option');
     const [value,setValue] = React.useState(`op_no_1_for_${key}`);
+    const [req,setReq] = React.useState(false);
     const classes = useStyles();
-    const this_uiHandler = ({type,data}) => {
-        switch (type) {
-            case 'EDIT_OPTION':{
-                setOptions(data);
-                setCurr_op(data[data.length -1].text)
-                uiHandler({type:'SET_OPTION',data})
-                break;
+    const onOptionChangeListener = (index,edit) => (event) =>{
+        const len = options.length;
+        if(index<len){
+            if(edit){
+                //edit option
+                let newOption = options;
+                newOption[index] = event.target.value;
+                setOptions(newOption);
+            }else{
+                //delete an option
+                let newOption = []
+                options.forEach((option,idx) => {
+                    if(idx !== index){
+                        newOption.push(option)
+                    }
+                });
+                setOptions(newOption);
             }
-            case 'REMV_OPTION':{
-                setOptions(data);
-                uiHandler({type:'SET_OPTION',data})
-                if(data.length > 0){
-                    setCurr_op(data[data.length -1].text)
-                }
-                break;
-            }
-            case 'APND_OPTION':{
-                setOptions(data);
-                uiHandler({type:'SET_OPTION',data})
-                // setCurr_op('New option')
-                break; 
-            }
-            default :{
-                alert('unknown form operation');
-                break;
-            }
+        }else{
+            //adding new option
+            setOptions([...options,'New option']);
         }
     }
     return ( 
@@ -44,17 +38,49 @@ const SingleMCQ = (props) => {
             {console.log(options)}
             <RadioGroup color="primary" value={value} onChange={e=> setValue(e.target.value)} aria-label="options" name={`${key}`} >
                 {
-                    options.map( (option,index) => <FormControlLabel key={`op_no_${index+1}${option.id}_for_${key}`} control={<Radio value={`op_no_${index+1}_for_${key}`} color="primary"/>} label={<span><TextField id={`${key}_OP_${index}`} helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>} onChange={e => setCurr_op(e.target.value)} defaultValue={option.text} onKeyDown={editOption(index,options,this_uiHandler,curr_op)} placeholder="New option" color="primary"/><IconButton onClick={removeOption(index,options,this_uiHandler)} color="primary"><MdCancel/></IconButton></span>}/>)
+                    options.map( (option,index) => <FormControlLabel 
+                                                        key={`op_no_${index+1}${option.id}_for_${key}`} 
+                                                        control={<Radio 
+                                                                    value={`op_no_${index+1}_for_${key}`} 
+                                                                    color="primary"
+                                                                />} 
+                                                                    label={<span><TextField 
+                                                                                    id={`${key}_OP_${index}`} 
+                                                                                    key={option}
+                                                                                    helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>} 
+                                                                                    defaultValue={option}
+                                                                                    onChange={onOptionChangeListener(index,true)}
+                                                                                    placeholder="New option" 
+                                                                                    color="primary"
+                                                                                />
+                                                                                <IconButton 
+                                                                                    onClick={onOptionChangeListener(index)} 
+                                                                                    color="primary">
+                                                                                        <MdCancel/>
+                                                                                </IconButton>
+                                                                            </span>}
+                                                        />)
                 }
-                <FormControlLabel control={<Radio disabled color="primary"/>} label={<span><TextField defaultValue="Add option" disabled color="primary"/><IconButton onClick={ appendOption(options,this_uiHandler,curr_op) } color="primary"><MdAddBox/></IconButton></span>}/>
+                <FormControlLabel 
+                    control={<Radio disabled color="primary"/>} 
+                    label={<span><TextField 
+                                    defaultValue="Add option" 
+                                    disabled 
+                                    color="primary"/>
+                                <IconButton 
+                                    onClick={onOptionChangeListener(options.length) } 
+                                    color="primary">
+                                    <MdAddBox/>
+                                </IconButton>
+                            </span>}/>
             </RadioGroup>
             <FormControlLabel
                 className={classes.switch}
                 control={<Switch 
-                    checked={required}
+                    checked={req}
                     color='primary'
                     id={`REQ_${index}`}
-                    onChange={ e => uiHandler({type:'REQ',data:!required})}
+                    onChange={ e => setReq(!req)}
                  />}
                  label="required"
              />

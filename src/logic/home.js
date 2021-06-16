@@ -41,6 +41,15 @@ export const formCreator = (noe) => {
             required:req,
             type:toe
         }
+        if(toe == 'SO'){
+            const key = `SO_${index}`;
+            const radios_count = document.getElementsByName(key).length - 1;
+            let options = [];
+            for (let index = 0; index < radios_count; index++) {
+                options.push({text:document.getElementById(`${key}_OP_${index}`).value,id:index});
+            }
+            data.options = options;
+        }
         formdata.push(data)
     });
     console.log(formdata);
