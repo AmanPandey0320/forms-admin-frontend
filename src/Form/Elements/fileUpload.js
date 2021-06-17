@@ -5,9 +5,10 @@ import { mimeTypeIcon } from './elements.logic'
 import React from 'react';
 
 const FileUpload = (props) => {
-    const {required,uiHandler,elid,index} = props;
+    const {required,elid,index} = props;
     const classes = useStyles();
     const fileRef = React.useRef();
+    const[req,setReq]=React.useState(required);
     const [file,setFile] = React.useState(null);
     return ( 
         <FormControl className={classes.formControl} >
@@ -33,10 +34,10 @@ const FileUpload = (props) => {
                 <FormControlLabel
                     className={classes.switch}
                     control={<Switch 
-                        checked={required}
+                        checked={req}
                         color='primary'
                         id={`REQ_${index}`}
-                        onChange={ e => uiHandler({type:'REQ',data:!required})}
+                        onChange={ e => setReq(!req)}
                     />}
                     label="required"
                 />

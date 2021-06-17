@@ -6,7 +6,8 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 
  const ParaGraph = (props) => {
      const classes = useStyles();
-     const {required,uiHandler,elid,index} = props;
+     const {required,elid,index} = props;
+     const [req,setReq]=React.useState(required);
      return ( 
          <FormControl className={classes.formControl}>
              
@@ -21,10 +22,10 @@ import { FormControlLabel, Switch } from '@material-ui/core';
              <FormControlLabel
                 className={classes.switch}
                 control={<Switch 
-                    checked={required}
+                    checked={req}
                     color='primary'
                     id={`REQ_${index}`}
-                    onChange={ e => uiHandler({type:'REQ',data:!required})}
+                    onChange={ e => setReq(!req)}
                  />}
                  label="required"
              />

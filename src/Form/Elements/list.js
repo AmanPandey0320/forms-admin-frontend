@@ -14,7 +14,8 @@ const DateTime = (props) => {
     const [config,setConfig] = React.useState({one:true,two:true});
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [selectedTime, setSelectedTime] = React.useState(new Date());
-    const {required,uiHandler,index} = props;
+    const {required,uiHandler,index,elid} = props;
+    const [req,setReq] = React.useState(required)
     const this_uiHandler = (type) => (e) => {
         console.log(type);
         if(type === 'ONE'){
@@ -31,15 +32,15 @@ const DateTime = (props) => {
             <FormControl className={classes.formControl} >
             {/* {console.log(config)} */}
                 <FormGroup className={classes.checkbox} >
-                    <FormControlLabel color="primary" control={<Checkbox checked={config.one} onChange={this_uiHandler('ONE')} color="primary" />} label="Date" />
-                    <FormControlLabel color="primary" control={<Checkbox checked={config.two} onChange={this_uiHandler('TWO')} color="primary" />} label="Time" />
+                    <FormControlLabel color="primary" control={<Checkbox id={`${elid}_D`} checked={config.one} onChange={this_uiHandler('ONE')} color="primary" />} label="Date" />
+                    <FormControlLabel color="primary" control={<Checkbox id={`${elid}_T`} checked={config.two} onChange={this_uiHandler('TWO')} color="primary" />} label="Time" />
                     <FormControlLabel
                         className={classes.switch}
                         control={<Switch 
-                            checked={required}
+                            checked={req}
                             color='primary'
                             id={`REQ_${index}`}
-                            onChange={ e => uiHandler({type:'REQ',data:!required})}
+                            onChange={ e => setReq(!req)}
                         />}
                         label="required"
                     />
@@ -52,7 +53,7 @@ const DateTime = (props) => {
                         config.one && 
                         <KeyboardDatePicker
                             margin="normal"
-                            id="date-picker-dialog"
+                            id={`${elid}_DATE`}
                             label="Select date"
                             format="MM/dd/yyyy"
                             color="primary"
@@ -67,7 +68,7 @@ const DateTime = (props) => {
                         config.two &&
                         <KeyboardTimePicker
                             margin="normal"
-                            id="time-picker"
+                            id={`${elid}_TIME`}
                             label="Select time"
                             color="primary"
                             value={selectedTime}

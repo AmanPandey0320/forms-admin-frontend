@@ -36,19 +36,25 @@ export const formCreator = (noe) => {
     noe.forEach((toe,index)=> {
         const que = document.getElementById(`QUE_${index}`).value;
         const req = document.getElementById(`REQ_${index}`).checked;
+        const key = `${toe}_${index}`;
         let data = {
             question:que,
             required:req,
-            type:toe
+            type:toe,
+            key:key
         }
-        if(toe === 'SO'){
-            const key = `SO_${index}`;
+        if(toe === 'SO' || toe === 'MO'){
             const radios_count = document.getElementsByName(key).length - 1;
             let options = [];
             for (let index = 0; index < radios_count; index++) {
-                options.push({text:document.getElementById(`${key}_OP_${index}`).value,id:index});
+                options.push(document.getElementById(`${key}_OP_${index}`).value);
             }
             data.options = options;
+        }else if(toe === 'DD'){
+            const isDate = document.getElementById(`${key}_D`).checked;
+            const isTime = document.getElementById(`${key}_T`).checked;
+            data.date=isDate;
+            data.time=isTime;
         }
         formdata.push(data)
     });
