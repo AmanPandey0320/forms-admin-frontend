@@ -12,6 +12,8 @@ const NewTemplate = (props) => {
     const [decs,setDesc] = React.useState('This is the form description');
     const {data,uiHandler} = props;
 
+    console.log(noe);
+
     React.useEffect(()=>{
         document.body.style.backgroundColor = bgcolor;
 

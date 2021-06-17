@@ -14,7 +14,7 @@ import { RiSettingsLine,RiSendPlane2Line} from 'react-icons/ri';
 import { useHistory } from 'react-router';
 
 const MainDrawer = (props) => {
-    const { classes,drawer,toggleDrawer,toggleSettingDrawer,setComponent,component } = props
+    const { classes,drawer,toggleDrawer,toggleSettingDrawer,component } = props
     const history = useHistory();
     return ( 
         <>

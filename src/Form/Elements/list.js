@@ -14,7 +14,7 @@ const DateTime = (props) => {
     const [config,setConfig] = React.useState({one:true,two:true});
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [selectedTime, setSelectedTime] = React.useState(new Date());
-    const {required,uiHandler,elid,index} = props;
+    const {required,uiHandler,index} = props;
     const this_uiHandler = (type) => (e) => {
         console.log(type);
         if(type === 'ONE'){

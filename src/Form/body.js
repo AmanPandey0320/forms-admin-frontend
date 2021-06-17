@@ -17,7 +17,7 @@ const Body = (props) => {
         <BodyWrapper>
             <ThemeProvider theme={theme}>
                 {
-                    data.map((element,index)=><FormElement key={index} toe={noe == undefined ? element.type:noe[index]} data={element} index={index} formHandler = {uiHandler}/>)
+                    data.map((element,index)=><FormElement key={index} toe={noe === undefined ? element.type:noe[index]} data={element} index={index} formHandler = {uiHandler}/>)
                 }
             </ThemeProvider>
         </BodyWrapper>

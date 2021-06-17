@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Logs from './section/logs';
 import NewTemplate from './section/newTemplate';
@@ -25,7 +25,6 @@ const Home = (props) => {
     const history = useHistory();
     const [drawer,setDrawer] = React.useState(false);
     const [settingDrawer,setSettingDrawer] = React.useState(false);
-    const [component,setComponent] = React.useState('tempalte');
     const [header , setHeader] = React.useState(null);
     const [bgcolor,setBgcolor] = React.useState('#e6f7ff');
     const [color,setColor] = React.useState('#0099e6');
@@ -106,11 +105,20 @@ const Home = (props) => {
             formCreator(noe);
         }
     }
-    console.log(noe);
+    useEffect(()=>{
+        if(params.type === 'new-template'|| params.type === 'template'){
+            setForm_data([{
+                type:'ST',
+                question:null,
+                required:false
+            }]);
+            setNoe(['ST']);
+        }
+    },[params])
     return (
         <div>
             <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={params.type}/>
-            <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer}setComponent={setComponent} component={params.type}/>
+            <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} setNoe={setNoe} component={params.type}/>
 
             <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             { params.type === 'template' && !backDrop && <Template uiHandler={uiHandler} token = {props.token}/>}

@@ -21,9 +21,9 @@ const UpdateTemplate = (props) => {
     const {uiHandler,token,bgcolor} = props;
     const [data,setData] = React.useState(null)
     // let { color, bgColor:bgcolor,header }=
-    const [title,setTitle] = React.useState(null);
-    const [decs,setDesc] = React.useState(null);
-    const queryParams = new URLSearchParams(window.location.search);
+    const [,setTitle] = React.useState(null);
+    const [,setDesc] = React.useState(null);
+    const id = new URLSearchParams(window.location.search).get('id');
     const [backDrop,setBackBrop] = React.useState(true);
     const [snackbar,setSnackbar] = React.useState(false);
 
@@ -32,7 +32,7 @@ const UpdateTemplate = (props) => {
     React.useEffect(()=>{
         // console.log(data,title);
         document.body.style.backgroundColor = bgcolor;
-        getOneTemplate(queryParams.get('id'),token).then(res => {
+        getOneTemplate(id,token).then(res => {
             console.log(res);
             setData(res);
             setBackBrop(false)
@@ -42,7 +42,7 @@ const UpdateTemplate = (props) => {
         return () => {
             document.body.style.backgroundColor = '#ffffff';
         }
-    },[])
+    },[bgcolor,token,id])
 
     if(data === null ){
         return(

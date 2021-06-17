@@ -41,7 +41,7 @@ export const formCreator = (noe) => {
             required:req,
             type:toe
         }
-        if(toe == 'SO'){
+        if(toe === 'SO'){
             const key = `SO_${index}`;
             const radios_count = document.getElementsByName(key).length - 1;
             let options = [];

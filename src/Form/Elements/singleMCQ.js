@@ -7,7 +7,7 @@ const SingleMCQ = (props) => {
     const {required,elid:key,index} = props;
     const [options,setOptions] = React.useState(props.options?props.options:[]);
     const [value,setValue] = React.useState(`op_no_1_for_${key}`);
-    const [req,setReq] = React.useState(false);
+    const [req,setReq] = React.useState(required);
     const classes = useStyles();
     const onOptionChangeListener = (index,edit) => (event) =>{
         const len = options.length;
