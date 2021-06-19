@@ -6,7 +6,6 @@ import { MdAddBox,MdCancel } from 'react-icons/md';
 const MultipleMCQ = (props) => {
     const {required,elid:key,index} = props;
     const [options,setOptions] = React.useState(props.options?props.options:[]);
-    const [value,setValue] = React.useState(`op_no_1_for_${key}`);
     const [req,setReq]=React.useState(required);
     const classes = useStyles();
     const onOptionChangeListener = (index,edit) => (event) =>{
@@ -35,7 +34,7 @@ const MultipleMCQ = (props) => {
     return ( 
         <FormControl component="fieldset" className={classes.formControl} >
             <FormLabel component="legend" >Options</FormLabel>
-            <FormGroup color="primary" value={value} onChange={e=> setValue(e.target.value)} aria-label="options" >
+            <FormGroup color="primary" aria-label="options" >
                 {
                     options.map( (option,index) => <FormControlLabel 
                                                         key={`op_no_${index+1}${option.id}_for_${key}`} 
@@ -43,16 +42,15 @@ const MultipleMCQ = (props) => {
                                                                     name={key} 
                                                                     value={`op_no_${index+1}_for_${key}`} 
                                                                     color="primary"/>} 
-                                                                    label={<span>
-                                                                            <TextField 
-                                                                                id={`${key}_OP_${index}`} 
-                                                                                helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>}
-                                                                                defaultValue={option} 
-                                                                                key={option}
-                                                                                onChange={onOptionChangeListener(index,true)}
-                                                                                placeholder="New option" 
-                                                                                color="primary"
-                                                                            />
+                                                                    label={<span><TextField 
+                                                                        id={`${key}_OP_${index}`} 
+                                                                        key={option}
+                                                                        helperText={index+1 === options.length && <small>press <em>enter</em> to save option</small>} 
+                                                                        defaultValue={option}
+                                                                        onChange={onOptionChangeListener(index,true)}
+                                                                        placeholder="New option" 
+                                                                        color="primary"
+                                                                    />
                                                                             <IconButton 
                                                                                 onClick={onOptionChangeListener(index)}  
                                                                                 color="primary">

@@ -15,8 +15,6 @@ const Heading = (props) => {
             }
         }
     });
-    const { uiHandler } = props;
-    const {setDesc,setTitle} = uiHandler;
     return ( 
         <HeadingWrapper borderColor={props.color}>
             <ThemeProvider theme={theme}>
@@ -30,7 +28,6 @@ const Heading = (props) => {
                             input: classes.resize,
                             },
                         }}
-                        onChange={e => setTitle(e.target.value)}
                         color='primary'
                         className={classes.textField}
                         autoFocus={true}/>
@@ -42,7 +39,6 @@ const Heading = (props) => {
                         defaultValue={props.decs}
                         style={{width:'100%'}}
                         color="primary"
-                        onChange={e => setDesc(e.target.value)}
                         multiline={true}
                         autoFocus={true}
                     />

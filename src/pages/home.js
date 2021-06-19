@@ -85,7 +85,7 @@ const Home = (props) => {
                     color:color,
                     header:header
                 },
-                data:form_data,
+                data:formCreator(noe),
                 enabled:true
             }
             console.log(data);

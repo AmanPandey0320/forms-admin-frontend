@@ -58,5 +58,6 @@ export const formCreator = (noe) => {
         }
         formdata.push(data)
     });
-    console.log(formdata);
+    return formdata;
+    // console.log(formdata);
 }

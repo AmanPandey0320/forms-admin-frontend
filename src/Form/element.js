@@ -40,7 +40,7 @@ const Element = (props) => {
             { type === 'PG' && <Paragraph required={required} elid={`${type}_${index}`} index={index} uiHandler={uiHandler}/>}
             { type === 'SO' && <SingleMCQ options={data.options} elid={`${type}_${index}`} index={index} required={required} uiHandler={uiHandler}/>}
             { type === 'MO' && <MultipleMCQ required={required} elid={`${type}_${index}`} index={index} options={data.options} uiHandler={uiHandler}/>}
-            { type === 'DD' && <ListDD required={required} elid={`${type}_${index}`} index={index} uiHandler={uiHandler}/>}
+            { type === 'DD' && <ListDD required={required} elid={`${type}_${index}`} index={index}  uiHandler={uiHandler}/>}
             { type === 'FU' && <FileUpload id={1} required={required} elid={`${type}_${index}`} index={index} uiHandler={uiHandler}/>}
         </BodyElement>
      );

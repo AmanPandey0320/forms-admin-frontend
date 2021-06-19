@@ -27,7 +27,6 @@ const Templates = (props) => {
 
     return ( 
         <Container className={classes.root} disableGutters={true} >
-            {console.log(data)}
             <Grid spacing={5} container>
                 {
                     data.map(element => {
