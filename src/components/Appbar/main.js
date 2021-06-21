@@ -7,14 +7,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { RiSettingsLine,RiSendPlane2Line,RiAddFill } from 'react-icons/ri';
 import { IconContext } from 'react-icons';
 import Tooltip from '@material-ui/core/Tooltip';
-import { MdUpdate } from 'react-icons/md';
+import { MdSave } from 'react-icons/md';
 import { addBtnClickHandler,sendBtnClickListener,updateBtnClickListener } from '../../logic/form'
 
 const MainAppbar = (props) => {
     const { classes,toggleDrawer,toggleSettingDrawer,component,uiHandler,index } = props;
     return ( 
         <>
-            <AppBar color="primary" position="static">
+            <AppBar position="sticky" color="primary">
                 <Toolbar>
                     <IconButton edge="start" onClick={toggleDrawer(true)} className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
@@ -42,7 +42,7 @@ const MainAppbar = (props) => {
                             {
                                 component==='view-template' && <Tooltip title="Update template">
                                     <IconButton onClick={updateBtnClickListener(uiHandler)} >
-                                        <MdUpdate/>
+                                        <MdSave/>
                                     </IconButton>
                                 </Tooltip>
                             }
@@ -61,7 +61,7 @@ const MainAppbar = (props) => {
                         <IconContext.Provider value={{color:'white'}}>
                             <Tooltip title="Update template">
                                 <IconButton onClick={updateBtnClickListener(uiHandler)} >
-                                    <MdUpdate/>
+                                    <MdSave/>
                                 </IconButton>
                             </Tooltip>
                         </IconContext.Provider>

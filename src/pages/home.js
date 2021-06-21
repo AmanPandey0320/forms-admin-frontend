@@ -92,10 +92,6 @@ const Home = (props) => {
             submit_template(data,setBackDrop,setError,history,setForm_data);
             setColor('#0099e6');
             setBgcolor('#e6f7ff');
-        }else if(type === 'UPDATE_TEMPLATE_DATA'){
-            alert('updating template');
-        }else if(type === 'UPDATE_TEMPLATE'){
-
         }else if(type === 'VIEW_TEMPLATE'){
             setView(data);
             history.push(`/home/view-template?id=${data.template_id}`)

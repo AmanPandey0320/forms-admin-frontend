@@ -16,6 +16,7 @@
     "clsx": "^1.1.1",
     "date-fns": "latest",
     "dotenv": "^8.2.0",
+    "framer-motion": "^4.1.17",
     "html-react-parser": "^1.2.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",

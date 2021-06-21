@@ -112,5 +112,7 @@ export const sendBtnClickListener = (uiHandler) => (e) => {
     uiHandler({type:'CREATE_TEMPLATE',data:null,index:null});
 }
 export const updateBtnClickListener=(uiHandler)=>(e)=>{
-    uiHandler({type:'UPDATE_TEMPLATE_DATA',data:null,index:null});
+    const url = window.location.href;
+    const id = url.split('?id=')[1];
+    alert(id)
 }
