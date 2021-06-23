@@ -113,10 +113,12 @@ const Home = (props) => {
     },[params])
     return (
         <div>
+            {params.type != 'view-template' && <>
             <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={params.type}/>
             <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} setNoe={setNoe} component={params.type}/>
 
-            <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
+            <SettingDrawer settingDrawer={settingDrawer} setBgcolor={setBgcolor} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/></>}
+            
             { params.type === 'template' && !backDrop && <Template uiHandler={uiHandler} token = {props.token}/>}
             { params.type === 'new-template' && !backDrop && <NewTemplate uiHandler={uiHandler} noe={noe} data={form_data} color={color} bgcolor = {bgcolor} header={header}/>}
             { params.type === 'logs' && !backDrop && <Logs token = {props.token}/>}

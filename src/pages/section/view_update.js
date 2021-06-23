@@ -8,6 +8,8 @@ import { getOneTemplate } from '../../logic/form'
 import { Backdrop,CircularProgress,Snackbar } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import Appbar from '../../components/Appbar/view_update';
+import SettingDrawer from '../../components/Drawer/settings';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -26,6 +28,17 @@ const UpdateTemplate = (props) => {
     const id = new URLSearchParams(window.location.search).get('id');
     const [backDrop,setBackBrop] = React.useState(true);
     const [snackbar,setSnackbar] = React.useState(false);
+    const [drawer,setDrawer] = React.useState(false);
+    const [bg,setBg] = React.useState(bgcolor);
+    const [color,setColor] = React.useState('#0099e6');
+    const [header , setHeader] = React.useState(null);
+    const toggleSettingDrawer = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return;
+        }
+    
+        setDrawer(open)
+    };
 
     const classes = useStyles();
 
@@ -58,11 +71,15 @@ const UpdateTemplate = (props) => {
     }
 
     return ( 
-        <FormWrapper>
+        <>
+            <Appbar title = {data.title}/>
+            <SettingDrawer settingDrawer={drawer} setBgcolor={setBg} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
+            <FormWrapper>
                 <Header bg={data.theme.header != null ? themes[data.theme.header].img : null} />
                 <Heading color={data.theme.color} title={data.title} decs={data.description} uiHandler = {{setDesc,setTitle}} />
                 <Body uiHandler={uiHandler} data={data.data} color={data.theme.color}/>
-        </FormWrapper>
+            </FormWrapper>
+        </>
      );
 }
  
