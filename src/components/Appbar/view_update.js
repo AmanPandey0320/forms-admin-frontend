@@ -24,7 +24,7 @@ class MainAppBar extends React.Component{
                     <FaWpforms color="#4f4f4f" size="2em"/>
                     <Typography className={this.props.classes.text}>{this.props.title}</Typography>
                     <Container className={this.props.classes.container} >
-                        <IconButton className={this.props.classes.button}>
+                        <IconButton className={this.props.classes.button} onClick={this.props.toggleDrawer(true)} >
                             <VscSettings color="#4f4f4f"/>
                         </IconButton>
                     </Container>

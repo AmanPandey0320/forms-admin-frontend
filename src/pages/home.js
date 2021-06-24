@@ -88,7 +88,7 @@ const Home = (props) => {
                 data:formCreator(noe),
                 enabled:true
             }
-            console.log(data);
+            // console.log(data);
             submit_template(data,setBackDrop,setError,history,setForm_data);
             setColor('#0099e6');
             setBgcolor('#e6f7ff');
@@ -113,7 +113,7 @@ const Home = (props) => {
     },[params])
     return (
         <div>
-            {params.type != 'view-template' && <>
+            {params.type !== 'view-template' && <>
             <MainAppbar classes={classes} index = {form_data.length} uiHandler={uiHandler} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} component={params.type}/>
             <MainDrawer classes = {classes} drawer={drawer} toggleDrawer={toggleDrawer} toggleSettingDrawer={toggleSettingDrawer} setNoe={setNoe} component={params.type}/>
 

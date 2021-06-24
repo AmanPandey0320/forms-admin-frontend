@@ -10,7 +10,7 @@ import FileUpload from './Elements/fileUpload';
 
 const Element = (props) => {
     const { formHandler,index,data,toe } = props;
-    console.log(data);
+    // console.log(data);
     const [type,setType] = React.useState(toe);
     const [question,setQuestion] = React.useState(data.question);
     const [required,setRequired] = React.useState(data.required);

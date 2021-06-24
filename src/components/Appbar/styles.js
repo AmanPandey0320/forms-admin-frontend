@@ -13,12 +13,6 @@ const useStyles = makeStyles(theme => ({
         fontWeight:'500',
         fontSize:'x-large'
     },
-    list: {
-        width: 250,
-    },
-    heading:{
-
-    },
     container:{
         margin:0,
         width:'max-content',

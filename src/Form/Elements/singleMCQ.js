@@ -35,7 +35,7 @@ const SingleMCQ = (props) => {
     return ( 
         <FormControl component="fieldset" className={classes.formControl} >
             <FormLabel component="legend" >Options</FormLabel>
-            {console.log(options)}
+            {/* {console.log(options)} */}
             <RadioGroup color="primary" value={value} onChange={e=> setValue(e.target.value)} aria-label="options" name={`${key}`} >
                 {
                     options.map( (option,index) => <FormControlLabel 

@@ -15,14 +15,19 @@ const useStyles = makeStyles((theme) => ({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
-    }
+    },
+    list: {
+        width: 250,
+    },
+    heading:{
+
+    },
 }));
 
 const UpdateTemplate = (props) => {
 
-    const {uiHandler,token,bgcolor} = props;
+    const {token,bgcolor} = props;
     const [data,setData] = React.useState(null)
-    // let { color, bgColor:bgcolor,header }=
     const [,setTitle] = React.useState(null);
     const [,setDesc] = React.useState(null);
     const id = new URLSearchParams(window.location.search).get('id');
@@ -32,6 +37,9 @@ const UpdateTemplate = (props) => {
     const [bg,setBg] = React.useState(bgcolor);
     const [color,setColor] = React.useState('#0099e6');
     const [header , setHeader] = React.useState(null);
+    const [noe,setNoe] = React.useState([]);
+
+    //methods
     const toggleSettingDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -39,15 +47,32 @@ const UpdateTemplate = (props) => {
     
         setDrawer(open)
     };
+    //handlers
+    const uiHandler2 = ({data,type,index}) => {
+        if(type === 'ADD_TO_FORM'){
+            console.log(data,index)
+            let temp_noe = noe;
+            temp_noe[index] = data.type;
+            setNoe([...temp_noe]);
+        }
+    }
+
+
 
     const classes = useStyles();
 
     React.useEffect(()=>{
         // console.log(data,title);
-        document.body.style.backgroundColor = bgcolor;
+        document.body.style.backgroundColor = bg;
         getOneTemplate(id,token).then(res => {
-            console.log(res);
+            // console.log(res);
+            let temp_noe = [];
+            res.data.forEach(element => {
+                temp_noe.push(element.type);
+            });
             setData(res);
+            setNoe(temp_noe);
+            setColor(res.data.theme.color);
             setBackBrop(false)
         }).catch(err => {
             console.log(err);
@@ -55,7 +80,9 @@ const UpdateTemplate = (props) => {
         return () => {
             document.body.style.backgroundColor = '#ffffff';
         }
-    },[bgcolor,token,id])
+    },[bg,token,id])
+
+    console.log(color)
 
     if(data === null ){
         return(
@@ -70,14 +97,16 @@ const UpdateTemplate = (props) => {
         )
     }
 
+    console.log(noe);
+
     return ( 
         <>
-            <Appbar title = {data.title}/>
+            <Appbar toggleDrawer={toggleSettingDrawer} title = {data.title}/>
             <SettingDrawer settingDrawer={drawer} setBgcolor={setBg} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             <FormWrapper>
                 <Header bg={data.theme.header != null ? themes[data.theme.header].img : null} />
-                <Heading color={data.theme.color} title={data.title} decs={data.description} uiHandler = {{setDesc,setTitle}} />
-                <Body uiHandler={uiHandler} data={data.data} color={data.theme.color}/>
+                <Heading color={color} title={data.title} decs={data.description} uiHandler = {{setDesc,setTitle}} />
+                <Body uiHandler={uiHandler2} noe={noe} data={data.data} color={color}/>
             </FormWrapper>
         </>
      );

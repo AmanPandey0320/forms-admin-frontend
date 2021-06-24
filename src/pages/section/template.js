@@ -13,7 +13,7 @@ const Templates = (props) => {
     React.useEffect(()=>{
         let mount=true;
         retrive_template(props.token,(err,template) => {
-            console.log(template);
+            // console.log(template);
             if(template !== undefined && mount === true){
                 dispatch({type:'SET_DATA',forms:template});
             }
