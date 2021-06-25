@@ -4,11 +4,14 @@ import {
     AppBar,
     Toolbar,
     Typography,
-    IconButton
+    IconButton,
+    Tooltip
 } from '@material-ui/core';
 import { FaWpforms } from 'react-icons/fa'
 import { Container } from '@material-ui/core';
-import { VscSettings } from 'react-icons/vsc'
+import { VscSettings} from 'react-icons/vsc';
+import { CgAddR } from 'react-icons/cg';
+import { AiOutlineFileSync } from 'react-icons/ai';
 
 class MainAppBar extends React.Component{
     componentDidMount(){
@@ -21,12 +24,25 @@ class MainAppBar extends React.Component{
         return(
             <AppBar position="sticky" className = {this.props.classes.root}>
                 <Toolbar>
-                    <FaWpforms color="#4f4f4f" size="2em"/>
+                    {/*TODO -> this needs to be changed to logo*/}
+                    <FaWpforms color="#4f4f4f" size="2em"/>{/* <- this one here */}
                     <Typography className={this.props.classes.text}>{this.props.title}</Typography>
                     <Container className={this.props.classes.container} >
-                        <IconButton className={this.props.classes.button} onClick={this.props.toggleDrawer(true)} >
-                            <VscSettings color="#4f4f4f"/>
-                        </IconButton>
+                        <Tooltip title="Add new element">
+                            <IconButton className={this.props.classes.button}>
+                                <CgAddR color="#4f4f4f"/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Form settings">
+                            <IconButton className={this.props.classes.button} onClick={this.props.toggleDrawer(true)} >
+                                <VscSettings color="#4f4f4f"/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Sync form">
+                            <IconButton onClick={ this.props.updateHandler } className={this.props.classes.button}>
+                                <AiOutlineFileSync color="#4f4f4f"/>
+                            </IconButton>
+                        </Tooltip>
                     </Container>
                 </Toolbar>
             </AppBar>

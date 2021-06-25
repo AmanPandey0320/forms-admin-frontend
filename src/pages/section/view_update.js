@@ -10,6 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import Appbar from '../../components/Appbar/view_update';
 import SettingDrawer from '../../components/Drawer/settings';
+import { updateBtnClickListener } from '../../logic/update_template';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -72,7 +73,9 @@ const UpdateTemplate = (props) => {
             });
             setData(res);
             setNoe(temp_noe);
-            setColor(res.data.theme.color);
+            setColor(res.theme.color);
+            console.log(res.theme)
+            setHeader(res.theme.header != null ? res.theme.header : null);
             setBackBrop(false)
         }).catch(err => {
             console.log(err);
@@ -82,7 +85,6 @@ const UpdateTemplate = (props) => {
         }
     },[bg,token,id])
 
-    console.log(color)
 
     if(data === null ){
         return(
@@ -97,14 +99,15 @@ const UpdateTemplate = (props) => {
         )
     }
 
-    console.log(noe);
+    // console.log(noe);
+    // console.log(updateBtnClickListener(header,color,bg,id))
 
     return ( 
         <>
-            <Appbar toggleDrawer={toggleSettingDrawer} title = {data.title}/>
+            <Appbar updateHandler={updateBtnClickListener(header,color,bg,id,noe)} toggleDrawer={toggleSettingDrawer} title = {data.title}/>
             <SettingDrawer settingDrawer={drawer} setBgcolor={setBg} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             <FormWrapper>
-                <Header bg={data.theme.header != null ? themes[data.theme.header].img : null} />
+                <Header bg={header != null ?themes[header].img:null} />
                 <Heading color={color} title={data.title} decs={data.description} uiHandler = {{setDesc,setTitle}} />
                 <Body uiHandler={uiHandler2} noe={noe} data={data.data} color={color}/>
             </FormWrapper>
