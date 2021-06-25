@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Appbar from '../../components/Appbar/view_update';
 import SettingDrawer from '../../components/Drawer/settings';
 import { updateBtnClickListener } from '../../logic/update_template';
+import { useSelector,useDispatch } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -39,6 +40,8 @@ const UpdateTemplate = (props) => {
     const [color,setColor] = React.useState('#0099e6');
     const [header , setHeader] = React.useState(null);
     const [noe,setNoe] = React.useState([]);
+    const dispatch = useDispatch();
+    const saved_templates = useSelector(state => state.template.saved)
 
     //methods
     const toggleSettingDrawer = (open) => (event) => {
@@ -61,12 +64,31 @@ const UpdateTemplate = (props) => {
 
 
     const classes = useStyles();
-
+    // console.log(saved_templates)
     React.useEffect(()=>{
         // console.log(data,title);
         document.body.style.backgroundColor = bg;
-        getOneTemplate(id,token).then(res => {
-            // console.log(res);
+        const Saved_template = saved_templates[`${id}`];
+        if(Saved_template === undefined || Saved_template ===null  ){
+            console.log('api called form');
+            getOneTemplate(id,token).then(res => {
+                // console.log(res);
+                let temp_noe = [];
+                res.data.forEach(element => {
+                    temp_noe.push(element.type);
+                });
+                setData(res);
+                setNoe(temp_noe);
+                setColor(res.theme.color);
+                // console.log(res.theme)
+                setHeader(res.theme.header != null ? res.theme.header : null);
+                dispatch({type:'SAVE_FORM',id:id,form:res});
+                setBackBrop(false)
+            }).catch(err => {
+                console.log(err);
+            });
+        }else{
+            const res = Saved_template;
             let temp_noe = [];
             res.data.forEach(element => {
                 temp_noe.push(element.type);
@@ -74,16 +96,14 @@ const UpdateTemplate = (props) => {
             setData(res);
             setNoe(temp_noe);
             setColor(res.theme.color);
-            console.log(res.theme)
             setHeader(res.theme.header != null ? res.theme.header : null);
             setBackBrop(false)
-        }).catch(err => {
-            console.log(err);
-        });
+        }
+        
         return () => {
             document.body.style.backgroundColor = '#ffffff';
         }
-    },[bg,token,id])
+    },[bg,token,id,dispatch,saved_templates])
 
 
     if(data === null ){
@@ -100,11 +120,11 @@ const UpdateTemplate = (props) => {
     }
 
     // console.log(noe);
-    // console.log(updateBtnClickListener(header,color,bg,id))
+    // console.log(token);
 
     return ( 
         <>
-            <Appbar updateHandler={updateBtnClickListener(header,color,bg,id,noe)} toggleDrawer={toggleSettingDrawer} title = {data.title}/>
+            <Appbar updateHandler={updateBtnClickListener(header,color,bg,id,noe,token)} toggleDrawer={toggleSettingDrawer} title = {data.title}/>
             <SettingDrawer settingDrawer={drawer} setBgcolor={setBg} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             <FormWrapper>
                 <Header bg={header != null ?themes[header].img:null} />

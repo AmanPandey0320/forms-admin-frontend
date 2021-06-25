@@ -12,16 +12,20 @@ const Templates = (props) => {
 
     React.useEffect(()=>{
         let mount=true;
-        retrive_template(props.token,(err,template) => {
-            // console.log(template);
-            if(template !== undefined && mount === true){
-                dispatch({type:'SET_DATA',forms:template});
-            }
-        });
+        // console.log(data);
+        if(data.length === 0){
+            // console.log('api called');
+            retrive_template(props.token,(err,template) => {
+                // console.log(template);
+                if(template !== undefined && mount === true){
+                    dispatch({type:'SET_DATA',forms:template});
+                }
+            });
+        }
         return ()=>{
             mount=false;
         }
-    },[props.token,dispatch]);
+    },[props.token,dispatch,data]);
 
     const {uiHandler} = props;
 
