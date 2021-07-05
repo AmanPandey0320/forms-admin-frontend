@@ -20,6 +20,14 @@ class MainAppBar extends React.Component{
     componentWillUnmount(){
 
     }
+    handleAddElement = (event) => {
+        this.props.uiHandler({
+            type:'ADD_TO_FORM',
+            data:{
+                type:'ST'
+            }
+        });
+    }
     render(){
         return(
             <AppBar position="sticky" className = {this.props.classes.root}>
@@ -29,7 +37,7 @@ class MainAppBar extends React.Component{
                     <Typography className={this.props.classes.text}>{this.props.title}</Typography>
                     <Container className={this.props.classes.container} >
                         <Tooltip title="Add new element">
-                            <IconButton className={this.props.classes.button}>
+                            <IconButton onClick={this.handleAddElement} className={this.props.classes.button}>
                                 <CgAddR color="#4f4f4f"/>
                             </IconButton>
                         </Tooltip>

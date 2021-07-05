@@ -52,11 +52,11 @@ const UpdateTemplate = (props) => {
         setDrawer(open)
     };
     //handlers
-    const uiHandler2 = ({data,type,index}) => {
+    const uiHandler2 = ({data,type}) => {
         if(type === 'ADD_TO_FORM'){
-            console.log(data,index)
+            console.log(data)
             let temp_noe = noe;
-            temp_noe[index] = data.type;
+            temp_noe.push(data.type);
             setNoe([...temp_noe]);
         }
     }
@@ -124,12 +124,13 @@ const UpdateTemplate = (props) => {
 
     return ( 
         <>
-            <Appbar updateHandler={updateBtnClickListener(header,color,bg,id,noe,token)} toggleDrawer={toggleSettingDrawer} title = {data.title}/>
+            <Appbar updateHandler={updateBtnClickListener(header,color,bg,id,noe,token,dispatch)} uiHandler={uiHandler2} toggleDrawer={toggleSettingDrawer} title = {data.title}/>
             <SettingDrawer settingDrawer={drawer} setBgcolor={setBg} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             <FormWrapper>
                 <Header bg={header != null ?themes[header].img:null} />
                 <Heading color={color} title={data.title} decs={data.description} uiHandler = {{setDesc,setTitle}} />
                 <Body uiHandler={uiHandler2} noe={noe} data={data.data} color={color}/>
+                <div>&nbsp;</div>
             </FormWrapper>
         </>
      );

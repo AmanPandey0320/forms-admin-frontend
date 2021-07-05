@@ -7,7 +7,7 @@ const config = {
     },
     withCredentials: true
 }
-export const updateBtnClickListener = (header,color,bgColor,template_id,noe,auth_token) => (event) => {
+export const updateBtnClickListener = (header,color,bgColor,template_id,noe,auth_token,dispatch) => (event) => {
     const data = formCreator(noe);
     const title = document.getElementById('form_title_txt').value;
     const description = document.getElementById('form_description_txt').value;
@@ -38,19 +38,6 @@ export const updateBtnClickListener = (header,color,bgColor,template_id,noe,auth
             console.log(result);
         }
     });
-    console.log(form);
+    dispatch({type:'SAVE_FORM',id:template_id,form:form});
     
 }
-
-// const data = {
-//     auth_token:props.token,
-//     title:document.getElementById('form_title_txt').value,
-//     description:document.getElementById('form_description_txt').value,
-//     theme:{
-//         bgColor:bgcolor,
-//         color:color,
-//         header:header
-//     },
-//     data:formCreator(noe),
-//     enabled:true
-// }
