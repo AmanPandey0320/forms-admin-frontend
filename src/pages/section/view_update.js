@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../../Form/headder';
 import { themes } from '../../assets/data/theme';
 import { FormWrapper } from '../../Form/styles';
@@ -67,7 +67,6 @@ const UpdateTemplate = (props) => {
     // console.log(saved_templates)
     React.useEffect(()=>{
         // console.log(data,title);
-        document.body.style.backgroundColor = bg;
         const Saved_template = saved_templates[`${id}`];
         if(Saved_template === undefined || Saved_template ===null  ){
             console.log('api called form');
@@ -103,7 +102,11 @@ const UpdateTemplate = (props) => {
         return () => {
             document.body.style.backgroundColor = '#ffffff';
         }
-    },[bg,token,id,dispatch,saved_templates])
+    },[token,id,dispatch,saved_templates])
+
+    useEffect(()=>{
+        document.body.style.backgroundColor = bg;
+    },[bg])
 
 
     if(data === null ){
@@ -124,7 +127,7 @@ const UpdateTemplate = (props) => {
 
     return ( 
         <>
-            <Appbar updateHandler={updateBtnClickListener(header,color,bg,id,noe,token,dispatch)} uiHandler={uiHandler2} toggleDrawer={toggleSettingDrawer} title = {data.title}/>
+            <Appbar updateHandler={updateBtnClickListener(header,color,bg,id,noe,token)} uiHandler={uiHandler2} toggleDrawer={toggleSettingDrawer} title = {data.title}/>
             <SettingDrawer settingDrawer={drawer} setBgcolor={setBg} setColor={setColor} setHeader={setHeader} toggleSettingDrawer={toggleSettingDrawer} classes = {classes}/>
             <FormWrapper>
                 <Header bg={header != null ?themes[header].img:null} />

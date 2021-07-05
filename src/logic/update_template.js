@@ -1,13 +1,14 @@
 import { formCreator } from './home';
 import { postToBackend } from './repository';
+import { store } from '../Reducers/rootReducer'
 const config = {
     headers: {
-        'Content-Type' : 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer forms_jwt_cookie`
     },
     withCredentials: true
 }
-export const updateBtnClickListener = (header,color,bgColor,template_id,noe,auth_token,dispatch) => (event) => {
+export const updateBtnClickListener = (header, color, bgColor, template_id, noe, auth_token) => (event) => {
     const data = formCreator(noe);
     const title = document.getElementById('form_title_txt').value;
     const description = document.getElementById('form_description_txt').value;
@@ -27,17 +28,32 @@ export const updateBtnClickListener = (header,color,bgColor,template_id,noe,auth
         template_id
     }
     const sender = {
-        endpoint:'/admin/template/update',
-        data:form,
-        config:config
+        endpoint: '/admin/template/update',
+        data: form,
+        config: config
     }
-    postToBackend(sender,(error,result)=>{
-        if(error){
+    postToBackend(sender, (error, result) => {
+        if (error) {
             console.log(error);
-        }else{
+        } else {
             console.log(result);
         }
     });
-    dispatch({type:'SAVE_FORM',id:template_id,form:form});
-    
+    store.dispatch({
+        form,
+        type: 'SAVE_FORM',
+        id: template_id,
+    });
+    let { forms } = store.getState().template
+    forms.forEach(element => {
+        if (element.template_id === template_id) {
+            element.theme = { ...theme };
+        }
+    });
+
+    store.dispatch({
+        forms,
+        type: 'SET_DATA'
+    });
+
 }
