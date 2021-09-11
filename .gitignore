@@ -27,3 +27,4 @@ package-lock.json
 # deployment
 .firebase*
 firebase*
+private.txt
